@@ -24,141 +24,173 @@
         <TextBlock Grid.Row="1" Text="Select where to save the migration package."
                    Style="{StaticResource BodyText}" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,24" />
 
-        <StackPanel Grid.Row="2" MaxWidth="600" HorizontalAlignment="Center">
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                      Padding="0,0,4,0">
+            <StackPanel>
 
-            <!-- USB Drive -->
-            <Border x:Name="cardUSB" Style="{StaticResource ModeCard}" Margin="0,0,0,12" Padding="20">
+                <!-- Two-column card grid -->
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Path Grid.Column="0" Data="{StaticResource USBIcon}" Fill="{StaticResource PrimaryBrush}"
-                          Width="32" Height="32" Stretch="Uniform" Margin="0,0,16,0" VerticalAlignment="Center" />
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="USB Drive" Style="{StaticResource HeadingText}" />
-                        <TextBlock x:Name="txtUSBStatus" Text="Detecting USB drives..."
-                                   Style="{StaticResource CaptionText}" />
-                    </StackPanel>
-                    <ComboBox x:Name="cboUSBDrives" Grid.Column="2" Width="200" VerticalAlignment="Center"
-                              Visibility="Collapsed" />
-                </Grid>
-            </Border>
-
-            <!-- OneDrive -->
-            <Border x:Name="cardOneDrive" Style="{StaticResource ModeCard}" Margin="0,0,0,12" Padding="20">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="12" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Path Grid.Column="0" Data="{StaticResource CloudIcon}" Fill="{StaticResource InfoBrush}"
-                          Width="32" Height="32" Stretch="Uniform" Margin="0,0,16,0" VerticalAlignment="Center" />
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="OneDrive" Style="{StaticResource HeadingText}" />
-                        <TextBlock x:Name="txtOneDriveStatus" Text="Checking OneDrive sync folder..."
-                                   Style="{StaticResource CaptionText}" />
-                    </StackPanel>
-                    <TextBlock x:Name="txtOneDrivePath" Grid.Column="2" Style="{StaticResource CaptionText}"
-                               VerticalAlignment="Center" MaxWidth="200" TextTrimming="CharacterEllipsis" />
-                </Grid>
-            </Border>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-            <!-- Google Drive -->
-            <Border x:Name="cardGoogleDrive" Style="{StaticResource ModeCard}" Margin="0,0,0,12" Padding="20">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Path Grid.Column="0" Data="{StaticResource CloudIcon}" Fill="{StaticResource SuccessBrush}"
-                          Width="32" Height="32" Stretch="Uniform" Margin="0,0,16,0" VerticalAlignment="Center" />
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="Google Drive" Style="{StaticResource HeadingText}" />
-                        <TextBlock x:Name="txtGDriveStatus" Text="Checking Google Drive sync folder..."
-                                   Style="{StaticResource CaptionText}" />
-                    </StackPanel>
-                    <TextBlock x:Name="txtGDrivePath" Grid.Column="2" Style="{StaticResource CaptionText}"
-                               VerticalAlignment="Center" MaxWidth="200" TextTrimming="CharacterEllipsis" />
-                </Grid>
-            </Border>
+                    <!-- Left column: Storage destinations -->
 
-            <!-- Network Share -->
-            <Border x:Name="cardNetworkShare" Style="{StaticResource ModeCard}" Margin="0,0,0,12" Padding="20">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Path Grid.Column="0" Data="{StaticResource FolderIcon}" Fill="{StaticResource InfoBrush}"
-                          Width="32" Height="32" Stretch="Uniform" Margin="0,0,16,0" VerticalAlignment="Center" />
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="Network Share" Style="{StaticResource HeadingText}" />
-                        <TextBlock Text="Enter a UNC path (\\server\share)"
-                                   Style="{StaticResource CaptionText}" />
-                    </StackPanel>
-                    <TextBox x:Name="txtNetworkPath" Grid.Column="2" Width="220" VerticalAlignment="Center"
-                             FontSize="12" Padding="6,4" />
-                </Grid>
-            </Border>
+                    <!-- USB Drive -->
+                    <Border x:Name="cardUSB" Grid.Row="0" Grid.Column="0"
+                            Style="{StaticResource ModeCard}" Margin="0,0,0,12" Padding="16">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Path Grid.Row="0" Grid.Column="0" Data="{StaticResource USBIcon}" Fill="{StaticResource PrimaryBrush}"
+                                  Width="28" Height="28" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center" />
+                            <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="USB Drive" Style="{StaticResource HeadingText}" />
+                                <TextBlock x:Name="txtUSBStatus" Text="Detecting USB drives..."
+                                           Style="{StaticResource CaptionText}" />
+                            </StackPanel>
+                            <ComboBox x:Name="cboUSBDrives" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                      Margin="0,8,0,0" VerticalAlignment="Center" Visibility="Collapsed" />
+                        </Grid>
+                    </Border>
 
-            <!-- Custom Folder -->
-            <Border x:Name="cardCustom" Style="{StaticResource ModeCard}" Margin="0,0,0,12" Padding="20">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Path Grid.Column="0" Data="{StaticResource FolderIcon}" Fill="{StaticResource WarningBrush}"
-                          Width="32" Height="32" Stretch="Uniform" Margin="0,0,16,0" VerticalAlignment="Center" />
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="Custom Folder" Style="{StaticResource HeadingText}" />
-                        <TextBlock Text="Choose any local or network folder"
-                                   Style="{StaticResource CaptionText}" />
-                    </StackPanel>
-                    <Button x:Name="btnBrowse" Grid.Column="2" Content="Browse..."
-                            Style="{StaticResource SecondaryButton}" Padding="12,6" FontSize="12" />
-                </Grid>
-            </Border>
+                    <!-- OneDrive -->
+                    <Border x:Name="cardOneDrive" Grid.Row="1" Grid.Column="0"
+                            Style="{StaticResource ModeCard}" Margin="0,0,0,12" Padding="16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Path Grid.Column="0" Data="{StaticResource CloudIcon}" Fill="{StaticResource InfoBrush}"
+                                  Width="28" Height="28" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="OneDrive" Style="{StaticResource HeadingText}" />
+                                <TextBlock x:Name="txtOneDriveStatus" Text="Checking OneDrive sync folder..."
+                                           Style="{StaticResource CaptionText}" />
+                                <TextBlock x:Name="txtOneDrivePath" Style="{StaticResource CaptionText}"
+                                           TextTrimming="CharacterEllipsis" Foreground="{StaticResource TextSecondaryBrush}" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
 
-            <!-- Direct Network Transfer -->
-            <Border x:Name="cardNetworkDirect" Style="{StaticResource ModeCard}" Margin="0,0,0,12" Padding="20">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Path Grid.Column="0" Data="{StaticResource FolderIcon}" Fill="{StaticResource PrimaryBrush}"
-                          Width="32" Height="32" Stretch="Uniform" Margin="0,0,16,0" VerticalAlignment="Center" />
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="Direct Network Transfer" Style="{StaticResource HeadingText}" />
-                        <TextBlock Text="Push directly to another PC on the network"
-                                   Style="{StaticResource CaptionText}" />
-                    </StackPanel>
-                </Grid>
-            </Border>
+                    <!-- Google Drive -->
+                    <Border x:Name="cardGoogleDrive" Grid.Row="2" Grid.Column="0"
+                            Style="{StaticResource ModeCard}" Margin="0,0,0,12" Padding="16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Path Grid.Column="0" Data="{StaticResource CloudIcon}" Fill="{StaticResource SuccessBrush}"
+                                  Width="28" Height="28" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Google Drive" Style="{StaticResource HeadingText}" />
+                                <TextBlock x:Name="txtGDriveStatus" Text="Checking Google Drive sync folder..."
+                                           Style="{StaticResource CaptionText}" />
+                                <TextBlock x:Name="txtGDrivePath" Style="{StaticResource CaptionText}"
+                                           TextTrimming="CharacterEllipsis" Foreground="{StaticResource TextSecondaryBrush}" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
 
-            <!-- Encryption Option -->
-            <Border Background="{StaticResource SurfaceBrush}" CornerRadius="6" Padding="16" Margin="0,8,0,0">
-                <StackPanel>
-                    <CheckBox x:Name="chkEncrypt" Content="Encrypt migration package (AES-256)"
-                              Style="{StaticResource MigratorCheckBox}" IsChecked="False" />
-                    <StackPanel x:Name="panelEncryptPassword" Visibility="Collapsed" Margin="24,8,0,0">
-                        <TextBlock Text="Set a password for encryption:" Style="{StaticResource CaptionText}" Margin="0,0,0,4" />
-                        <PasswordBox x:Name="txtEncryptPassword" Width="250" HorizontalAlignment="Left"
-                                     FontSize="12" Padding="6,4" />
-                        <PasswordBox x:Name="txtEncryptPasswordConfirm" Width="250" HorizontalAlignment="Left"
-                                     FontSize="12" Padding="6,4" Margin="0,4,0,0" />
-                        <TextBlock x:Name="txtEncryptError" Text="" Foreground="Red" FontSize="11" Margin="0,4,0,0" />
+                    <!-- Right column: Network / folder options -->
+
+                    <!-- Network Share -->
+                    <Border x:Name="cardNetworkShare" Grid.Row="0" Grid.Column="2"
+                            Style="{StaticResource ModeCard}" Margin="0,0,0,12" Padding="16">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Path Grid.Row="0" Grid.Column="0" Data="{StaticResource FolderIcon}" Fill="{StaticResource InfoBrush}"
+                                  Width="28" Height="28" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center" />
+                            <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Network Share" Style="{StaticResource HeadingText}" />
+                                <TextBlock Text="Enter a UNC path (\\server\share)"
+                                           Style="{StaticResource CaptionText}" />
+                            </StackPanel>
+                            <TextBox x:Name="txtNetworkPath" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                     Margin="0,8,0,0" FontSize="12" Padding="6,4" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Custom Folder -->
+                    <Border x:Name="cardCustom" Grid.Row="1" Grid.Column="2"
+                            Style="{StaticResource ModeCard}" Margin="0,0,0,12" Padding="16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Path Grid.Column="0" Data="{StaticResource FolderIcon}" Fill="{StaticResource WarningBrush}"
+                                  Width="28" Height="28" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Custom Folder" Style="{StaticResource HeadingText}" />
+                                <TextBlock Text="Choose any local or network folder"
+                                           Style="{StaticResource CaptionText}" />
+                            </StackPanel>
+                            <Button x:Name="btnBrowse" Grid.Column="2" Content="Browse..."
+                                    Style="{StaticResource SecondaryButton}" Padding="10,5" FontSize="12" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Direct Network Transfer -->
+                    <Border x:Name="cardNetworkDirect" Grid.Row="2" Grid.Column="2"
+                            Style="{StaticResource ModeCard}" Margin="0,0,0,12" Padding="16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Path Grid.Column="0" Data="{StaticResource FolderIcon}" Fill="{StaticResource PrimaryBrush}"
+                                  Width="28" Height="28" Stretch="Uniform" Margin="0,0,12,0" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="Direct Network Transfer" Style="{StaticResource HeadingText}" />
+                                <TextBlock Text="Push directly to another PC on the network"
+                                           Style="{StaticResource CaptionText}" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+
+                <!-- Encryption Option (full width below cards) -->
+                <Border Background="{StaticResource SurfaceBrush}" CornerRadius="6" Padding="16" Margin="0,4,0,0">
+                    <StackPanel>
+                        <CheckBox x:Name="chkEncrypt" Content="Encrypt migration package (AES-256)"
+                                  Style="{StaticResource MigratorCheckBox}" IsChecked="False" />
+                        <StackPanel x:Name="panelEncryptPassword" Visibility="Collapsed" Margin="24,8,0,0">
+                            <TextBlock Text="Set a password for encryption:" Style="{StaticResource CaptionText}" Margin="0,0,0,4" />
+                            <PasswordBox x:Name="txtEncryptPassword" Width="250" HorizontalAlignment="Left"
+                                         FontSize="12" Padding="6,4" />
+                            <PasswordBox x:Name="txtEncryptPasswordConfirm" Width="250" HorizontalAlignment="Left"
+                                         FontSize="12" Padding="6,4" Margin="0,4,0,0" />
+                            <TextBlock x:Name="txtEncryptError" Text="" Foreground="Red" FontSize="11" Margin="0,4,0,0" />
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </Border>
-        </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
