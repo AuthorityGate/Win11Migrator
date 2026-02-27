@@ -138,6 +138,10 @@ function Initialize-ScanProgressPage {
                 $job = $scanCtx.AppJob
                 if ($job -and $job.Handle.IsCompleted) {
                     Write-Host "[SCAN] Phase 1: Background job completed" -ForegroundColor Cyan
+                    # Defensive dot-source: ensure functions are available in closure scope
+                    $migratorRoot = $s.MigratorRoot
+                    . (Join-Path $migratorRoot "Core\Write-MigrationLog.ps1")
+                    . (Join-Path $migratorRoot "Modules\AppDiscovery\Get-NormalizedAppName.ps1")
                     try {
                         $result = $job.PowerShell.EndInvoke($job.Handle)
                         $appList = @($result)
@@ -236,6 +240,7 @@ function Initialize-ScanProgressPage {
                 try {
                     $migratorRoot = $s.MigratorRoot
                     $script:MigratorRoot = $migratorRoot
+                    . (Join-Path $migratorRoot "Core\Write-MigrationLog.ps1")
                     $osCtxPath = Join-Path $migratorRoot "Core\Get-OSMigrationContext.ps1"
                     if (Test-Path $osCtxPath) {
                         . $osCtxPath

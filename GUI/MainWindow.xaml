@@ -44,8 +44,11 @@
         </Border>
 
         <!-- Content Frame -->
-        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"
-               Margin="0" />
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"
+                   Margin="0" />
+        </ScrollViewer>
 
         <!-- Footer Navigation -->
         <Border Grid.Row="2" Background="{StaticResource SurfaceBrush}"
