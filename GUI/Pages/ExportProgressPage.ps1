@@ -334,6 +334,7 @@ function Initialize-ExportProgressPage {
                         if (-not $pushResult.Success) {
                             $errors += "NetworkDirect: $($pushResult.Errors -join '; ')"
                         }
+                        $State['RemoteRestoreLaunched'] = $pushResult.RemoteRestoreLaunched
                     }
                 }
                 $null = $prog.Log.Add("  Transfer complete")
