@@ -39,6 +39,10 @@ function Initialize-ImportSourcePage {
     $loadManifest = {
         param([string]$PkgPath)
 
+        # Defensive dot-source: ensure functions are available in closure scope
+        . (Join-Path $State.MigratorRoot "Core\Write-MigrationLog.ps1")
+        . (Join-Path $State.MigratorRoot "Core\Read-MigrationManifest.ps1")
+
         # Check if this is an encrypted package file
         if ((Test-Path $PkgPath) -and -not (Test-Path (Join-Path $PkgPath "manifest.json"))) {
             # Might be an encrypted .w11mcrypt file or a directory without manifest

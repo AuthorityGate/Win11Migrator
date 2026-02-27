@@ -42,6 +42,9 @@ function Initialize-NetworkTargetPage {
     # Scan Network button
     # -------------------------------------------------------------------------
     $ui.BtnScanNetwork.Add_Click({
+        # Defensive dot-source: ensure functions are available in closure scope
+        . (Join-Path $State.MigratorRoot "Core\Write-MigrationLog.ps1")
+        . (Join-Path $State.MigratorRoot "Modules\NetworkTransfer\Find-NetworkComputers.ps1")
         Write-MigrationLog -Message "User clicked Scan Network" -Level Info
         $ui.BtnScanNetwork.IsEnabled = $false
         $ui.TxtScanStatus.Text = 'Scanning network, please wait...'
@@ -79,6 +82,8 @@ function Initialize-NetworkTargetPage {
     # Computer list selection changed
     # -------------------------------------------------------------------------
     $ui.LstComputers.Add_SelectionChanged({
+        # Defensive dot-source: ensure functions are available in closure scope
+        . (Join-Path $State.MigratorRoot "Core\Write-MigrationLog.ps1")
         $selected = $ui.LstComputers.SelectedItem
         if ($selected) {
             $ui.TxtHostname.Text = $selected.ComputerName
@@ -90,6 +95,9 @@ function Initialize-NetworkTargetPage {
     # Test Connection button
     # -------------------------------------------------------------------------
     $ui.BtnTestConnection.Add_Click({
+        # Defensive dot-source: ensure functions are available in closure scope
+        . (Join-Path $State.MigratorRoot "Core\Write-MigrationLog.ps1")
+        . (Join-Path $State.MigratorRoot "Modules\NetworkTransfer\Test-RemoteAccess.ps1")
         $hostname = $ui.TxtHostname.Text.Trim()
         $username = $ui.TxtUsername.Text.Trim()
         $password = $ui.TxtPassword.Password

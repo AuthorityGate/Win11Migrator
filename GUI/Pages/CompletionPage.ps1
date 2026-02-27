@@ -185,6 +185,8 @@ function Initialize-CompletionPage {
     if ($btnHealthCheck -and $State.Mode -eq 'Import') {
         $btnHealthCheck.Visibility = 'Visible'
         $btnHealthCheck.Add_Click({
+            # Defensive dot-source: ensure functions are available in closure scope
+            . (Join-Path $State.MigratorRoot "Core\Invoke-HealthCheck.ps1")
             try {
                 $manifest = $State.Manifest
                 if (-not $manifest) {
