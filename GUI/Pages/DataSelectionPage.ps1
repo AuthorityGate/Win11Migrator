@@ -107,8 +107,8 @@ function Initialize-DataSelectionPage {
             $col0.Width = [System.Windows.GridLength]::new(1, [System.Windows.GridUnitType]::Star)
             $col1 = [System.Windows.Controls.ColumnDefinition]::new()
             $col1.Width = [System.Windows.GridLength]::Auto
-            $row.ColumnDefinitions.Add($col0)
-            $row.ColumnDefinitions.Add($col1)
+            $null = $row.ColumnDefinitions.Add($col0)
+            $null = $row.ColumnDefinitions.Add($col1)
             $row.Margin = [System.Windows.Thickness]::new(0, 4, 0, 4)
 
             $cb = [System.Windows.Controls.CheckBox]::new()

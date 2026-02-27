@@ -177,7 +177,7 @@ function Initialize-ImportSourcePage {
                     $btn.Add_Click({
                         & $loadManifest $this.Tag
                     }.GetNewClosure())
-                    $panelDetectedSources.Children.Add($btn)
+                    $null = $panelDetectedSources.Children.Add($btn)
                 }
             }
         } catch {}
@@ -187,6 +187,6 @@ function Initialize-ImportSourcePage {
         $noPackages = [System.Windows.Controls.TextBlock]::new()
         $noPackages.Text = "No migration packages detected. Use Browse to locate your package."
         $noPackages.Style = $Page.FindResource('CaptionText')
-        $panelDetectedSources.Children.Add($noPackages)
+        $null = $panelDetectedSources.Children.Add($noPackages)
     }
 }

@@ -151,7 +151,7 @@ function Initialize-CompletionPage {
             $stepsBlock.TextWrapping = 'Wrap'
             $stepsBlock.Margin = [System.Windows.Thickness]::new(0, 8, 0, 0)
             try { $stepsBlock.Style = $Page.FindResource('BodyText') } catch {}
-            $panelExportSteps.Children.Add($stepsBlock)
+            $null = $panelExportSteps.Children.Add($stepsBlock)
         }
     }
 
