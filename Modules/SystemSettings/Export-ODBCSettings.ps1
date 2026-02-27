@@ -143,7 +143,7 @@ function Export-ODBCSettings {
                     }
 
                     # Capture all attributes
-                    if ($dsn.Attribute) {
+                    if ($dsn.Attribute -and $dsn.Attribute -is [System.Collections.IDictionary]) {
                         foreach ($key in $dsn.Attribute.Keys) {
                             $dsnInfo.Attribute[$key] = $dsn.Attribute[$key]
                         }

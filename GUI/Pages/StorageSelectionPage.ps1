@@ -108,11 +108,15 @@ function Initialize-StorageSelectionPage {
         Write-Host "[STORAGE] Cloud detection error: $($_.Exception.Message)" -ForegroundColor Red
     }
 
+    # Helper: remove NetworkTargetPage when switching away from NetworkDirect
+    $removeNetPage = { if ($State.RemoveNetworkPage) { & $State.RemoveNetworkPage $State } }
+
     # Card click handlers
     $ui.CardUSB.Add_MouseLeftButtonUp({
         if ($ui.CardUSB.Opacity -ge 1) {
             foreach ($c in $allCards) { $c.BorderBrush = $Page.FindResource('BorderBrush') }
             $ui.CardUSB.BorderBrush = $Page.FindResource('PrimaryBrush')
+            & $removeNetPage
             $State.BtnNext.IsEnabled = $true
             $driveIdx = $ui.CboUSBDrives.SelectedIndex
             if ($driveIdx -ge 0 -and $State.USBDrives) {
@@ -125,6 +129,7 @@ function Initialize-StorageSelectionPage {
         if ($ui.CardOneDrive.Opacity -ge 1) {
             foreach ($c in $allCards) { $c.BorderBrush = $Page.FindResource('BorderBrush') }
             $ui.CardOneDrive.BorderBrush = $Page.FindResource('PrimaryBrush')
+            & $removeNetPage
             $State.BtnNext.IsEnabled = $true
             $State.StorageTarget = @{ Type = 'OneDrive'; Path = $State.OneDrivePath }
         }
@@ -134,6 +139,7 @@ function Initialize-StorageSelectionPage {
         if ($ui.CardGDrive.Opacity -ge 1) {
             foreach ($c in $allCards) { $c.BorderBrush = $Page.FindResource('BorderBrush') }
             $ui.CardGDrive.BorderBrush = $Page.FindResource('PrimaryBrush')
+            & $removeNetPage
             $State.BtnNext.IsEnabled = $true
             $State.StorageTarget = @{ Type = 'GoogleDrive'; Path = $State.GoogleDrivePath }
         }
@@ -144,6 +150,7 @@ function Initialize-StorageSelectionPage {
         $ui.CardNetShare.Add_MouseLeftButtonUp({
             foreach ($c in $allCards) { $c.BorderBrush = $Page.FindResource('BorderBrush') }
             $ui.CardNetShare.BorderBrush = $Page.FindResource('PrimaryBrush')
+            & $removeNetPage
             $uncPath = $ui.TxtNetPath.Text.Trim()
             if ($uncPath -match '^\\\\[^\\]+\\[^\\]+') {
                 $State.StorageTarget = @{ Type = 'NetworkShare'; Path = $uncPath }
@@ -168,6 +175,7 @@ function Initialize-StorageSelectionPage {
     $ui.CardCustom.Add_MouseLeftButtonUp({
         foreach ($c in $allCards) { $c.BorderBrush = $Page.FindResource('BorderBrush') }
         $ui.CardCustom.BorderBrush = $Page.FindResource('PrimaryBrush')
+        & $removeNetPage
         # Don't enable Next until Browse dialog succeeds and sets StorageTarget
     }.GetNewClosure())
 
@@ -189,6 +197,8 @@ function Initialize-StorageSelectionPage {
             foreach ($c in $allCards) { $c.BorderBrush = $Page.FindResource('BorderBrush') }
             $ui.CardNetDirect.BorderBrush = $Page.FindResource('PrimaryBrush')
             $State.StorageTarget = @{ Type = 'NetworkDirect'; Path = '' }
+            # Insert NetworkTargetPage into the wizard so user is prompted for hostname/credentials
+            if ($State.InsertNetworkPage) { & $State.InsertNetworkPage $State }
             $State.BtnNext.IsEnabled = $true
         }.GetNewClosure())
     }

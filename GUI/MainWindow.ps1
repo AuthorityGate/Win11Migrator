@@ -165,8 +165,9 @@ function Show-MainWindow {
         # Update step indicator
         $txtStepIndicator.Text = "Step $($PageIndex + 1) of $($State.Pages.Count)"
 
-        # Update button states
+        # Update button states (re-enable Back — progress pages will disable it in their init)
         $btnBack.Visibility = if ($PageIndex -eq 0) { 'Collapsed' } else { 'Visible' }
+        $btnBack.IsEnabled = $true
 
         $lastPage = $State.Pages.Count - 1
         if ($PageIndex -eq $lastPage) {
@@ -231,7 +232,7 @@ function Show-MainWindow {
         & $State.NavigateTo 1 $State
     }
 
-    # Dynamic page insertion for NetworkDirect mode
+    # Dynamic page insertion/removal for NetworkDirect mode
     $state['InsertNetworkPage'] = {
         param([hashtable]$State)
         # Insert NetworkTargetPage after StorageSelectionPage if not already present
@@ -247,6 +248,19 @@ function Show-MainWindow {
                 }
                 $State.Pages = $newPages
                 $State.ExportPages = $newPages
+            }
+        }
+    }
+
+    $state['RemoveNetworkPage'] = {
+        param([hashtable]$State)
+        # Remove NetworkTargetPage if present (user switched away from NetworkDirect)
+        if ($State.Pages -contains 'NetworkTargetPage') {
+            $State.Pages = @($State.Pages | Where-Object { $_ -ne 'NetworkTargetPage' })
+            $State.ExportPages = $State.Pages
+            # Clear cached page so it reinitializes if re-inserted
+            if ($State.PageCache -and $State.PageCache.ContainsKey('NetworkTargetPage')) {
+                $State.PageCache.Remove('NetworkTargetPage')
             }
         }
     }

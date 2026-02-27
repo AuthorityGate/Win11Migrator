@@ -150,7 +150,7 @@ function Initialize-ExportProgressPage {
                 $obj = [BrowserProfile]::new()
                 $obj.Browser = $bp.Browser
                 $obj.ProfileName = $bp.ProfileName
-                $obj.ProfilePath = if ($bp.Path) { $bp.Path } elseif ($bp.ProfilePath) { $bp.ProfilePath } else { '' }
+                $obj.ProfilePath = if ($bp.ProfilePath) { $bp.ProfilePath } else { '' }
                 $obj.Selected = $true
                 $browserItems += $obj
             }
