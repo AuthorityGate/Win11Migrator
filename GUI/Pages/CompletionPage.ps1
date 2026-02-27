@@ -46,9 +46,8 @@ function Initialize-CompletionPage {
     $selectedApps = ($State.Apps | Where-Object { $_.Selected }).Count
     $selectedData = ($State.UserData | Where-Object { $_.Selected }).Count
     $selectedBrowsers = ($State.BrowserProfiles | Where-Object { $_.Selected }).Count
-    # SystemSettings are hashtables with @{Category; Count}, not objects with .Selected
     $selectedSettings = if ($State.SystemSettings) {
-        ($State.SystemSettings | Measure-Object -Property Count -Sum).Sum
+        @($State.SystemSettings).Count
     } else { 0 }
 
     $txtAppsSummary.Text = "$selectedApps"
