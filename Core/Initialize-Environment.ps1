@@ -84,11 +84,11 @@ class MigrationManifest {
     [hashtable]$SourceOSContext
     [string]$MigrationScope           # SameOS, Win10ToWin11, Win11ToWin10
     [bool]$USMTStorePresent = $false
-    [MigrationApp[]]$Apps = @()
-    [UserDataItem[]]$UserData = @()
-    [BrowserProfile[]]$BrowserProfiles = @()
-    [SystemSetting[]]$SystemSettings = @()
-    [hashtable[]]$AppProfiles = @()
+    [object[]]$Apps = @()
+    [object[]]$UserData = @()
+    [object[]]$BrowserProfiles = @()
+    [object[]]$SystemSettings = @()
+    [object[]]$AppProfiles = @()
     [hashtable]$Metadata = @{}
 }
 

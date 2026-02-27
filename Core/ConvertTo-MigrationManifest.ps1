@@ -24,11 +24,11 @@ function ConvertTo-MigrationManifest {
         [Parameter(Mandatory)]
         [string]$OutputPath,
 
-        [MigrationApp[]]$Apps,
-        [UserDataItem[]]$UserData,
-        [BrowserProfile[]]$BrowserProfiles,
-        [SystemSetting[]]$SystemSettings,
-        [hashtable[]]$AppProfiles,
+        $Apps,
+        $UserData,
+        $BrowserProfiles,
+        $SystemSettings,
+        $AppProfiles,
         [hashtable]$Metadata
     )
 
@@ -63,11 +63,12 @@ function ConvertTo-MigrationManifest {
         $manifest.USMTStorePresent = $Metadata['USMTStorePresent']
     }
 
-    if ($Apps)            { $manifest.Apps = $Apps }
-    if ($UserData)        { $manifest.UserData = $UserData }
-    if ($BrowserProfiles) { $manifest.BrowserProfiles = $BrowserProfiles }
-    if ($SystemSettings)  { $manifest.SystemSettings = $SystemSettings }
-    if ($AppProfiles)     { $manifest.AppProfiles = $AppProfiles }
+    # Assign data arrays — use @() wrapping to safely handle cross-runspace type differences
+    if ($Apps)            { $manifest.Apps = @($Apps) }
+    if ($UserData)        { $manifest.UserData = @($UserData) }
+    if ($BrowserProfiles) { $manifest.BrowserProfiles = @($BrowserProfiles) }
+    if ($SystemSettings)  { $manifest.SystemSettings = @($SystemSettings) }
+    if ($AppProfiles)     { $manifest.AppProfiles = @($AppProfiles) }
     if ($Metadata)        { $manifest.Metadata = $Metadata }
 
     $json = $manifest | ConvertTo-Json -Depth 10

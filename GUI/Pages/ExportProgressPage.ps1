@@ -179,29 +179,38 @@ function Initialize-ExportProgressPage {
         $prog.Phase = 'Exporting system settings...'
         $prog.Percent = 42
         $null = $prog.Log.Add('[Phase 3/7] Exporting system settings...')
-        try {
-            $settingsDir = Join-Path $LocalPkgPath "SystemSettings"
-            New-Item -Path $settingsDir -ItemType Directory -Force | Out-Null
-            $settings = @()
-            if ($State.IncludeWiFi)          { $prog.Item = "WiFi profiles"; $settings += Export-WiFiProfiles -ExportPath (Join-Path $settingsDir "WiFi"); $prog.Percent = 42 }
-            if ($State.IncludePrinters)      { $prog.Item = "Printer configs"; $settings += Export-PrinterConfigs -ExportPath (Join-Path $settingsDir "Printers"); $prog.Percent = 43 }
-            if ($State.IncludeDrives)        { $prog.Item = "Mapped drives"; $settings += Export-MappedDrives -ExportPath (Join-Path $settingsDir "MappedDrives"); $prog.Percent = 44 }
-            if ($State.IncludeEnvVars)       { $prog.Item = "Environment variables"; $settings += Export-EnvironmentVariables -ExportPath (Join-Path $settingsDir "EnvVars"); $prog.Percent = 45 }
-            if ($State.IncludeWinSettings)   { $prog.Item = "Windows settings"; $settings += Export-WindowsSettings -ExportPath (Join-Path $settingsDir "WindowsSettings"); $prog.Percent = 46 }
-            if ($State.IncludeAccessibility) { $prog.Item = "Accessibility settings"; $settings += Export-AccessibilitySettings -ExportPath (Join-Path $settingsDir "Accessibility"); $prog.Percent = 47 }
-            if ($State.IncludeRegional)      { $prog.Item = "Regional settings"; $settings += Export-RegionalSettings -ExportPath (Join-Path $settingsDir "Regional"); $prog.Percent = 48 }
-            if ($State.IncludeVPN)           { $prog.Item = "VPN connections"; $settings += Export-VPNConnections -ExportPath (Join-Path $settingsDir "VPN"); $prog.Percent = 49 }
-            if ($State.IncludeCertificates)  { $prog.Item = "User certificates"; $settings += Export-UserCertificates -ExportPath (Join-Path $settingsDir "Certificates"); $prog.Percent = 50 }
-            if ($State.IncludeODBC)          { $prog.Item = "ODBC data sources"; $settings += Export-ODBCSettings -ExportPath (Join-Path $settingsDir "ODBC"); $prog.Percent = 51 }
-            if ($State.IncludeFolderOptions) { $prog.Item = "Folder options"; $settings += Export-FolderOptions -ExportPath (Join-Path $settingsDir "FolderOptions"); $prog.Percent = 52 }
-            if ($State.IncludeInputSettings) { $prog.Item = "Input settings"; $settings += Export-InputSettings -ExportPath (Join-Path $settingsDir "InputSettings"); $prog.Percent = 53 }
-            if ($State.IncludePower)         { $prog.Item = "Power plan"; $settings += Export-PowerSettings -ExportPath (Join-Path $settingsDir "PowerPlan"); $prog.Percent = 54 }
-            $State.SystemSettings = $settings
-            $null = $prog.Log.Add("  Exported system settings")
-        } catch {
-            $errors += "SystemSettings: $($_.Exception.Message)"
-            $null = $prog.Log.Add("  [ERROR] SystemSettings: $($_.Exception.Message)")
+        $settingsDir = Join-Path $LocalPkgPath "SystemSettings"
+        New-Item -Path $settingsDir -ItemType Directory -Force | Out-Null
+        $settings = @()
+        $settingsExports = @(
+            @{ Flag = 'IncludeWiFi';          Label = 'WiFi profiles';          Func = 'Export-WiFiProfiles';          Sub = 'WiFi';              Pct = 42 }
+            @{ Flag = 'IncludePrinters';      Label = 'Printer configs';        Func = 'Export-PrinterConfigs';        Sub = 'Printers';          Pct = 43 }
+            @{ Flag = 'IncludeDrives';        Label = 'Mapped drives';          Func = 'Export-MappedDrives';          Sub = 'MappedDrives';      Pct = 44 }
+            @{ Flag = 'IncludeEnvVars';       Label = 'Environment variables';  Func = 'Export-EnvironmentVariables';  Sub = 'EnvVars';           Pct = 45 }
+            @{ Flag = 'IncludeWinSettings';   Label = 'Windows settings';       Func = 'Export-WindowsSettings';       Sub = 'WindowsSettings';   Pct = 46 }
+            @{ Flag = 'IncludeAccessibility'; Label = 'Accessibility settings'; Func = 'Export-AccessibilitySettings'; Sub = 'Accessibility';     Pct = 47 }
+            @{ Flag = 'IncludeRegional';      Label = 'Regional settings';      Func = 'Export-RegionalSettings';      Sub = 'Regional';          Pct = 48 }
+            @{ Flag = 'IncludeVPN';           Label = 'VPN connections';        Func = 'Export-VPNConnections';        Sub = 'VPN';               Pct = 49 }
+            @{ Flag = 'IncludeCertificates';  Label = 'User certificates';      Func = 'Export-UserCertificates';      Sub = 'Certificates';      Pct = 50 }
+            @{ Flag = 'IncludeODBC';          Label = 'ODBC data sources';      Func = 'Export-ODBCSettings';          Sub = 'ODBC';              Pct = 51 }
+            @{ Flag = 'IncludeFolderOptions'; Label = 'Folder options';         Func = 'Export-FolderOptions';         Sub = 'FolderOptions';     Pct = 52 }
+            @{ Flag = 'IncludeInputSettings'; Label = 'Input settings';         Func = 'Export-InputSettings';         Sub = 'InputSettings';     Pct = 53 }
+            @{ Flag = 'IncludePower';         Label = 'Power plan';             Func = 'Export-PowerSettings';         Sub = 'PowerPlan';         Pct = 54 }
+        )
+        foreach ($exp in $settingsExports) {
+            if ($State[$exp.Flag]) {
+                $prog.Item = $exp.Label
+                try {
+                    $result = & $exp.Func -ExportPath (Join-Path $settingsDir $exp.Sub)
+                    if ($result) { $settings += $result }
+                } catch {
+                    $null = $prog.Log.Add("  [WARN] $($exp.Label): $($_.Exception.Message)")
+                }
+                $prog.Percent = $exp.Pct
+            }
         }
+        $State.SystemSettings = $settings
+        $null = $prog.Log.Add("  Exported $($settings.Count) system setting(s)")
 
         # Phase 3.5: USMT ScanState (if available)
         if ($Config.USMTAvailable -and $Config.USMTPath) {

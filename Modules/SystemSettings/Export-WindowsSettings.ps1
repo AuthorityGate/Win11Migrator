@@ -149,12 +149,14 @@ function Export-WindowsSettings {
         if (Test-Path $taskbandPath) {
             try {
                 $taskbandProps = Get-ItemProperty -Path $taskbandPath -ErrorAction SilentlyContinue
-                if ($taskbandProps.PSObject.Properties['FavoritesResolve']) {
-                    # Binary blob -- store as Base64 for potential restoration
-                    $taskbandData['FavoritesResolve'] = [Convert]::ToBase64String($taskbandProps.FavoritesResolve)
-                }
-                if ($taskbandProps.PSObject.Properties['Favorites']) {
-                    $taskbandData['Favorites'] = [Convert]::ToBase64String($taskbandProps.Favorites)
+                if ($taskbandProps) {
+                    if ($taskbandProps.PSObject.Properties['FavoritesResolve']) {
+                        # Binary blob -- store as Base64 for potential restoration
+                        $taskbandData['FavoritesResolve'] = [Convert]::ToBase64String($taskbandProps.FavoritesResolve)
+                    }
+                    if ($taskbandProps.PSObject.Properties['Favorites']) {
+                        $taskbandData['Favorites'] = [Convert]::ToBase64String($taskbandProps.Favorites)
+                    }
                 }
             }
             catch {
