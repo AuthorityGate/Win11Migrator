@@ -365,7 +365,7 @@ function Initialize-ScanProgressPage {
                                 $profiles = @(Get-ChildItem $def.Path -Directory -ErrorAction SilentlyContinue)
                             }
                             foreach ($p in $profiles) {
-                                $browsers += @{ Browser = $def.Name; ProfileName = $p.Name; Path = $p.FullName }
+                                $browsers += @{ Browser = $def.Name; ProfileName = $p.Name; ProfilePath = $p.FullName; Selected = $true; ExportStatus = 'Pending' }
                             }
                             if ($ui.Log) { $ui.Log.AppendText("  $($def.Name): $($profiles.Count) profile(s)`r`n") }
                         }
