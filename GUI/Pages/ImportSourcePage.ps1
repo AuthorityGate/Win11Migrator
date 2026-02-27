@@ -123,8 +123,18 @@ function Initialize-ImportSourcePage {
         }
     }.GetNewClosure())
 
-    # Auto-detect packages on USB drives and cloud folders
+    # Auto-detect packages on USB drives, cloud folders, and sibling directories
     $searchPaths = @()
+
+    # Check for migration packages adjacent to where Win11Migrator is running from
+    # This handles the case where Win11Migrator was bundled alongside a package on USB/cloud
+    if ($script:MigratorRoot) {
+        $searchPaths += $script:MigratorRoot
+        $migratorParent = Split-Path $script:MigratorRoot -Parent
+        if ($migratorParent -and (Test-Path $migratorParent)) {
+            $searchPaths += $migratorParent
+        }
+    }
 
     # Check USB drives
     try {

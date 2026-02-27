@@ -82,6 +82,78 @@ function Initialize-CompletionPage {
     } else {
         $txtCompleteTitle.Text = "Export Complete!"
         $txtCompleteSubtitle.Text = "Your migration package is ready for transfer."
+
+        # Show target-specific next-step instructions
+        $exportStepsText = $null
+        $storageTarget = if ($State.StorageTarget) { $State.StorageTarget } else { '' }
+
+        switch ($storageTarget) {
+            'USB' {
+                $exportStepsText = @(
+                    "Next steps to restore on your new PC:",
+                    "1. Plug the USB drive into your new PC",
+                    "2. Open the Win11Migrator folder on the USB drive",
+                    "3. Double-click Win11Migrator.bat",
+                    "4. The import wizard will auto-detect your migration package"
+                ) -join "`n"
+            }
+            'OneDrive' {
+                $exportStepsText = @(
+                    "Next steps to restore on your new PC:",
+                    "1. Sign into OneDrive on your new PC",
+                    "2. Wait for the Win11Migrator folder to sync",
+                    "3. Open the Win11Migrator folder in OneDrive",
+                    "4. Double-click Win11Migrator.bat to start the import"
+                ) -join "`n"
+            }
+            'GoogleDrive' {
+                $exportStepsText = @(
+                    "Next steps to restore on your new PC:",
+                    "1. Sign into Google Drive on your new PC",
+                    "2. Wait for the Win11Migrator folder to sync",
+                    "3. Open the Win11Migrator folder in Google Drive",
+                    "4. Double-click Win11Migrator.bat to start the import"
+                ) -join "`n"
+            }
+            'NetworkDirect' {
+                if ($State.RemoteRestoreLaunched) {
+                    $exportStepsText = "Restore is running automatically on the target machine. Check the target PC for progress."
+                } else {
+                    $exportStepsText = @(
+                        "Win11Migrator has been copied to the target machine.",
+                        "To complete the restore:",
+                        "1. Log into the target machine",
+                        "2. Open the Win11Migrator folder in your user profile",
+                        "3. Double-click Win11Migrator.bat to start the import"
+                    ) -join "`n"
+                }
+            }
+            'NetworkShare' {
+                $exportStepsText = @(
+                    "Next steps to restore on your new PC:",
+                    "1. Open the Win11Migrator folder on the network share",
+                    "2. Double-click Win11Migrator.bat",
+                    "3. The import wizard will auto-detect your migration package"
+                ) -join "`n"
+            }
+            default {
+                $exportStepsText = @(
+                    "Next steps to restore on your new PC:",
+                    "1. Open the Win11Migrator folder on your export target",
+                    "2. Double-click Win11Migrator.bat",
+                    "3. Select Import mode and choose your migration package"
+                ) -join "`n"
+            }
+        }
+
+        if ($exportStepsText -and $panelExportSteps) {
+            $stepsBlock = [System.Windows.Controls.TextBlock]::new()
+            $stepsBlock.Text = $exportStepsText
+            $stepsBlock.TextWrapping = 'Wrap'
+            $stepsBlock.Margin = [System.Windows.Thickness]::new(0, 8, 0, 0)
+            try { $stepsBlock.Style = $Page.FindResource('BodyText') } catch {}
+            $panelExportSteps.Children.Add($stepsBlock)
+        }
     }
 
     # Report buttons

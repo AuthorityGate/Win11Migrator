@@ -111,6 +111,13 @@ function Export-ToGoogleDrive {
         throw "Robocopy to Google Drive failed with exit code $exitCode."
     }
 
+    # Bundle Win11Migrator tool alongside the package so it can run directly on the target
+    try {
+        Copy-MigratorToTarget -TargetBasePath (Split-Path $targetPath -Parent)
+    } catch {
+        Write-MigrationLog -Message "Warning: Could not bundle Win11Migrator tool: $($_.Exception.Message)" -Level Warning
+    }
+
     $stopwatch.Stop()
 
     $targetFiles = Get-ChildItem $targetPath -Recurse -File -ErrorAction SilentlyContinue

@@ -128,6 +128,13 @@ function Export-ToUSBDrive {
 
     Write-MigrationLog -Message "Robocopy completed with exit code $robocopyExitCode" -Level Info
 
+    # Bundle Win11Migrator tool alongside the package so it can run directly on the target
+    try {
+        Copy-MigratorToTarget -TargetBasePath (Split-Path $targetPath -Parent)
+    } catch {
+        Write-MigrationLog -Message "Warning: Could not bundle Win11Migrator tool: $($_.Exception.Message)" -Level Warning
+    }
+
     # Verify integrity: compare file count and total size
     Write-MigrationLog -Message "Verifying copy integrity..." -Level Info
 

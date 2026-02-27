@@ -58,7 +58,9 @@ function Export-WiFiProfiles {
     # Lines look like: "    All User Profile     : MyNetwork"
     $profileNames = @()
     foreach ($line in $rawOutput) {
-        if ($line -match ':\s+(.+)$' -and $line -match 'Profile\s') {
+        # Check for 'Profile' first (no capture group), then extract the name.
+        # The capturing -match must run LAST so $Matches[1] is populated correctly.
+        if ($line -match 'Profile\s' -and $line -match ':\s+(.+)$') {
             $name = $Matches[1].Trim()
             if ($name) {
                 $profileNames += $name

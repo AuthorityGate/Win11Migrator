@@ -93,19 +93,11 @@ function Search-ChocolateyPackage {
         }
     }
 
-    # --- Phase 1: Dynamic CLI/API search (fallback for unknown apps) ---
-    # Try choco CLI first
-    $chocoCmd = Get-Command choco -ErrorAction SilentlyContinue
-    if ($chocoCmd) {
-        $result = Search-ChocolateyViaCli -SearchTerm $NormalizedName -NormalizedName $NormalizedName
-        if ($result.Found) {
-            return $result
-        }
-    }
-
-    # Fallback: Chocolatey community API (OData v2 endpoint)
-    $result = Search-ChocolateyViaApi -SearchTerm $NormalizedName -NormalizedName $NormalizedName
-    return $result
+    # Static map only — dynamic choco search / API calls are disabled because
+    # they are extremely slow (several seconds per app) and block the scan pipeline.
+    # With 500+ entries in the static map, the vast majority of common apps are covered.
+    Write-MigrationLog -Message "Chocolatey: no static map match for '$NormalizedName' (dynamic search disabled for performance)" -Level Debug
+    return $emptyResult
 }
 
 function Search-ChocolateyViaCli {
