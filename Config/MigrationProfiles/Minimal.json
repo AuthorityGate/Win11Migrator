@@ -1,0 +1,33 @@
+{
+  "Name": "Minimal",
+  "Description": "Minimal migration - essential apps only, no AppData, no app profiles",
+  "Apps": {
+    "IncludeAll": true,
+    "ExcludeCategories": []
+  },
+  "UserData": {
+    "Folders": ["Desktop", "Documents"],
+    "IncludeAppData": false
+  },
+  "BrowserProfiles": {
+    "IncludeAll": true
+  },
+  "SystemSettings": {
+    "WiFi": true,
+    "Printers": false,
+    "MappedDrives": false,
+    "EnvVars": false,
+    "WindowsSettings": false,
+    "Accessibility": false,
+    "Regional": false,
+    "VPN": false,
+    "Certificates": false,
+    "ODBC": false,
+    "FolderOptions": false,
+    "InputSettings": false,
+    "Power": false
+  },
+  "AppProfiles": {
+    "IncludeAll": false
+  }
+}

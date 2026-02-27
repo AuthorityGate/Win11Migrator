@@ -1,0 +1,1057 @@
+[
+  {
+    "Name": "Microsoft Outlook",
+    "DisplayMatch": ["*Outlook*"],
+    "Category": "Email",
+    "Files": [
+      "%APPDATA%\\Microsoft\\Outlook\\",
+      "%APPDATA%\\Microsoft\\Signatures\\",
+      "%LOCALAPPDATA%\\Microsoft\\Outlook\\RoamCache\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Microsoft\\Office\\16.0\\Outlook"
+    ]
+  },
+  {
+    "Name": "Microsoft Office 365",
+    "DisplayMatch": ["*Microsoft Office*", "*Microsoft 365*", "*Office 16*", "*Office 15*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Microsoft\\Office\\",
+      "%APPDATA%\\Microsoft\\Templates\\",
+      "%APPDATA%\\Microsoft\\UProof\\",
+      "%APPDATA%\\Microsoft\\Proof\\",
+      "%APPDATA%\\Microsoft\\Excel\\",
+      "%APPDATA%\\Microsoft\\Word\\",
+      "%APPDATA%\\Microsoft\\PowerPoint\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Microsoft\\Office\\16.0",
+      "HKCU:\\SOFTWARE\\Microsoft\\Office\\Common"
+    ]
+  },
+  {
+    "Name": "Microsoft OneNote",
+    "DisplayMatch": ["*OneNote*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Microsoft\\OneNote\\",
+      "%LOCALAPPDATA%\\Microsoft\\OneNote\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Microsoft\\Office\\16.0\\OneNote"
+    ]
+  },
+  {
+    "Name": "Google Chrome",
+    "DisplayMatch": ["*Google Chrome*", "*Chrome*"],
+    "Category": "Browser",
+    "Files": [
+      "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default\\Bookmarks",
+      "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default\\Preferences",
+      "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default\\Login Data",
+      "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Local State"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Google\\Chrome"
+    ]
+  },
+  {
+    "Name": "Microsoft Edge",
+    "DisplayMatch": ["*Microsoft Edge*"],
+    "Category": "Browser",
+    "Files": [
+      "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\Default\\Bookmarks",
+      "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\Default\\Preferences",
+      "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\Local State"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Microsoft\\Edge"
+    ]
+  },
+  {
+    "Name": "Mozilla Firefox",
+    "DisplayMatch": ["*Firefox*"],
+    "Category": "Browser",
+    "Files": [
+      "%APPDATA%\\Mozilla\\Firefox\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Mozilla"
+    ]
+  },
+  {
+    "Name": "Brave Browser",
+    "DisplayMatch": ["*Brave*"],
+    "Category": "Browser",
+    "Files": [
+      "%LOCALAPPDATA%\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Bookmarks",
+      "%LOCALAPPDATA%\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Preferences"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "VS Code",
+    "DisplayMatch": ["*Visual Studio Code*", "*VSCode*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\Code\\User\\settings.json",
+      "%APPDATA%\\Code\\User\\keybindings.json",
+      "%APPDATA%\\Code\\User\\snippets\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Visual Studio",
+    "DisplayMatch": ["*Visual Studio 20*"],
+    "Category": "Development",
+    "Files": [
+      "%LOCALAPPDATA%\\Microsoft\\VisualStudio\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Microsoft\\VisualStudio"
+    ]
+  },
+  {
+    "Name": "Windows Terminal",
+    "DisplayMatch": ["*Windows Terminal*"],
+    "Category": "Utilities",
+    "Files": [
+      "%LOCALAPPDATA%\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState\\settings.json"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "PowerShell Profiles",
+    "DisplayMatch": ["__always__"],
+    "Category": "Development",
+    "Files": [
+      "%USERPROFILE%\\Documents\\PowerShell\\",
+      "%USERPROFILE%\\Documents\\WindowsPowerShell\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Git Configuration",
+    "DisplayMatch": ["*Git*"],
+    "Category": "Development",
+    "Files": [
+      "%USERPROFILE%\\.gitconfig",
+      "%USERPROFILE%\\.gitignore_global"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "SSH Keys",
+    "DisplayMatch": ["__always__"],
+    "Category": "Security",
+    "RequiresConsent": true,
+    "Note": "Contains private keys - handle with care during migration",
+    "Files": [
+      "%USERPROFILE%\\.ssh\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "PuTTY Sessions",
+    "DisplayMatch": ["*PuTTY*"],
+    "Category": "Remote Access",
+    "Files": [],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\SimonTatham\\PuTTY\\Sessions",
+      "HKCU:\\SOFTWARE\\SimonTatham\\PuTTY\\SshHostKeys"
+    ]
+  },
+  {
+    "Name": "WinSCP Sessions",
+    "DisplayMatch": ["*WinSCP*"],
+    "Category": "Remote Access",
+    "Files": [
+      "%APPDATA%\\WinSCP.ini"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Martin Prikryl\\WinSCP 2\\Sessions"
+    ]
+  },
+  {
+    "Name": "VPN Connections (RAS)",
+    "DisplayMatch": ["__always__"],
+    "Category": "Network",
+    "Files": [
+      "%APPDATA%\\Microsoft\\Network\\Connections\\Pbk\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Sticky Notes",
+    "DisplayMatch": ["__always__"],
+    "Category": "Productivity",
+    "Files": [
+      "%LOCALAPPDATA%\\Packages\\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe\\LocalState\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Notepad++ Settings",
+    "DisplayMatch": ["*Notepad++*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\Notepad++\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "FileZilla Sessions",
+    "DisplayMatch": ["*FileZilla*"],
+    "Category": "Remote Access",
+    "Files": [
+      "%APPDATA%\\FileZilla\\sitemanager.xml",
+      "%APPDATA%\\FileZilla\\filezilla.xml",
+      "%APPDATA%\\FileZilla\\recentservers.xml"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Sublime Text Settings",
+    "DisplayMatch": ["*Sublime Text*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\Sublime Text\\Packages\\User\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "7-Zip Settings",
+    "DisplayMatch": ["*7-Zip*", "*7zip*"],
+    "Category": "Utilities",
+    "Files": [],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\7-Zip"
+    ]
+  },
+  {
+    "Name": "Slack",
+    "DisplayMatch": ["*Slack*"],
+    "Category": "Communication",
+    "Files": [
+      "%APPDATA%\\Slack\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Microsoft Teams",
+    "DisplayMatch": ["*Microsoft Teams*", "*Teams*"],
+    "Category": "Communication",
+    "Files": [
+      "%APPDATA%\\Microsoft\\Teams\\",
+      "%LOCALAPPDATA%\\Packages\\MSTeams_8wekyb3d8bbwe\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Microsoft\\Office\\Teams"
+    ]
+  },
+  {
+    "Name": "Zoom",
+    "DisplayMatch": ["*Zoom*"],
+    "Category": "Communication",
+    "Files": [
+      "%APPDATA%\\Zoom\\",
+      "%APPDATA%\\Zoom\\data\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Zoom"
+    ]
+  },
+  {
+    "Name": "Discord",
+    "DisplayMatch": ["*Discord*"],
+    "Category": "Communication",
+    "Files": [
+      "%APPDATA%\\discord\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "OBS Studio",
+    "DisplayMatch": ["*OBS Studio*"],
+    "Category": "Media",
+    "Files": [
+      "%APPDATA%\\obs-studio\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "VLC Settings",
+    "DisplayMatch": ["*VLC*"],
+    "Category": "Media",
+    "Files": [
+      "%APPDATA%\\vlc\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\VideoLAN"
+    ]
+  },
+  {
+    "Name": "Spotify",
+    "DisplayMatch": ["*Spotify*"],
+    "Category": "Media",
+    "Files": [
+      "%APPDATA%\\Spotify\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Adobe Acrobat/Reader",
+    "DisplayMatch": ["*Adobe Acrobat*", "*Adobe Reader*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Adobe\\Acrobat\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Adobe\\Acrobat Reader",
+      "HKCU:\\SOFTWARE\\Adobe\\Adobe Acrobat"
+    ]
+  },
+  {
+    "Name": "Adobe Creative Cloud",
+    "DisplayMatch": ["*Adobe Creative*", "*Adobe Photoshop*", "*Adobe Illustrator*", "*Adobe Premiere*", "*Adobe After Effects*", "*Adobe InDesign*", "*Adobe Lightroom*"],
+    "Category": "Creative",
+    "Files": [
+      "%APPDATA%\\Adobe\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Adobe"
+    ]
+  },
+  {
+    "Name": "KeePass",
+    "DisplayMatch": ["*KeePass*"],
+    "Category": "Security",
+    "Files": [
+      "%APPDATA%\\KeePass\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "1Password",
+    "DisplayMatch": ["*1Password*"],
+    "Category": "Security",
+    "Files": [
+      "%LOCALAPPDATA%\\1Password\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Bitwarden",
+    "DisplayMatch": ["*Bitwarden*"],
+    "Category": "Security",
+    "Files": [
+      "%APPDATA%\\Bitwarden\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "WinRAR",
+    "DisplayMatch": ["*WinRAR*"],
+    "Category": "Utilities",
+    "Files": [
+      "%APPDATA%\\WinRAR\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\WinRAR"
+    ]
+  },
+  {
+    "Name": "Beyond Compare",
+    "DisplayMatch": ["*Beyond Compare*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\Scooter Software\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Total Commander",
+    "DisplayMatch": ["*Total Commander*"],
+    "Category": "Utilities",
+    "Files": [
+      "%APPDATA%\\GHISLER\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Ghisler\\Total Commander"
+    ]
+  },
+  {
+    "Name": "Everything Search",
+    "DisplayMatch": ["*Everything*"],
+    "Category": "Utilities",
+    "Files": [
+      "%APPDATA%\\Everything\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Windows Credential Store",
+    "DisplayMatch": ["__always__"],
+    "Category": "Security",
+    "Note": "DPAPI-encrypted credentials are non-portable across machines - skipped by default",
+    "Files": [],
+    "Registry": []
+  },
+  {
+    "Name": "npm Configuration",
+    "DisplayMatch": ["*Node*", "*npm*"],
+    "Category": "Development",
+    "Files": [
+      "%USERPROFILE%\\.npmrc"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "pip Configuration",
+    "DisplayMatch": ["*Python*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\pip\\pip.ini"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Docker Desktop",
+    "DisplayMatch": ["*Docker*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\Docker\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "AWS CLI",
+    "DisplayMatch": ["*AWS CLI*", "*AWSCLI*", "*Amazon*AWS*"],
+    "Category": "Cloud",
+    "RequiresConsent": true,
+    "Note": "Contains credentials and access keys - handle with care during migration",
+    "Files": [
+      "%USERPROFILE%\\.aws\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Azure CLI",
+    "DisplayMatch": ["*Azure CLI*", "*Microsoft Azure*"],
+    "Category": "Cloud",
+    "Files": [
+      "%USERPROFILE%\\.azure\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Thunderbird",
+    "DisplayMatch": ["*Thunderbird*"],
+    "Category": "Email",
+    "Files": [
+      "%APPDATA%\\Thunderbird\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Mozilla\\Mozilla Thunderbird"
+    ]
+  },
+  {
+    "Name": "Signal",
+    "DisplayMatch": ["*Signal*"],
+    "Category": "Communication",
+    "Files": [
+      "%APPDATA%\\Signal\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Telegram",
+    "DisplayMatch": ["*Telegram*"],
+    "Category": "Communication",
+    "Files": [
+      "%APPDATA%\\Telegram Desktop\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "WhatsApp",
+    "DisplayMatch": ["*WhatsApp*"],
+    "Category": "Communication",
+    "Files": [
+      "%APPDATA%\\WhatsApp\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Postman",
+    "DisplayMatch": ["*Postman*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\Postman\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Insomnia",
+    "DisplayMatch": ["*Insomnia*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\Insomnia\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "DBeaver",
+    "DisplayMatch": ["*DBeaver*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\DBeaverData\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "HeidiSQL",
+    "DisplayMatch": ["*HeidiSQL*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\HeidiSQL\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\HeidiSQL"
+    ]
+  },
+  {
+    "Name": "SQL Server Management Studio",
+    "DisplayMatch": ["*SQL Server Management*", "*SSMS*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\Microsoft\\SQL Server Management Studio\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "PowerBI Desktop",
+    "DisplayMatch": ["*Power BI*", "*PowerBI*"],
+    "Category": "Productivity",
+    "Files": [
+      "%LOCALAPPDATA%\\Microsoft\\Power BI Desktop\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Snagit",
+    "DisplayMatch": ["*Snagit*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\TechSmith\\Snagit\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\TechSmith\\SnagIt"
+    ]
+  },
+  {
+    "Name": "Greenshot",
+    "DisplayMatch": ["*Greenshot*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Greenshot\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Remote Desktop Manager",
+    "DisplayMatch": ["*Remote Desktop Manager*"],
+    "Category": "Remote Access",
+    "Files": [
+      "%LOCALAPPDATA%\\Devolutions\\RemoteDesktopManager\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "mRemoteNG",
+    "DisplayMatch": ["*mRemoteNG*"],
+    "Category": "Remote Access",
+    "Files": [
+      "%APPDATA%\\mRemoteNG\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "RoyalTS",
+    "DisplayMatch": ["*Royal TS*", "*RoyalTS*"],
+    "Category": "Remote Access",
+    "Files": [
+      "%APPDATA%\\code4ward\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "MobaXterm",
+    "DisplayMatch": ["*MobaXterm*"],
+    "Category": "Remote Access",
+    "Files": [
+      "%APPDATA%\\MobaXterm\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Vivaldi",
+    "DisplayMatch": ["*Vivaldi*"],
+    "Category": "Browser",
+    "Files": [
+      "%LOCALAPPDATA%\\Vivaldi\\User Data\\Default\\Bookmarks",
+      "%LOCALAPPDATA%\\Vivaldi\\User Data\\Default\\Preferences"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Vivaldi"
+    ]
+  },
+  {
+    "Name": "Opera",
+    "DisplayMatch": ["*Opera*"],
+    "Category": "Browser",
+    "Files": [
+      "%APPDATA%\\Opera Software\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Opera Software"
+    ]
+  },
+  {
+    "Name": "Gimp",
+    "DisplayMatch": ["*GIMP*"],
+    "Category": "Creative",
+    "Files": [
+      "%APPDATA%\\GIMP\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Paint.NET",
+    "DisplayMatch": ["*paint.net*", "*Paint.NET*"],
+    "Category": "Creative",
+    "Files": [
+      "%LOCALAPPDATA%\\paint.net\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Audacity",
+    "DisplayMatch": ["*Audacity*"],
+    "Category": "Media",
+    "Files": [
+      "%APPDATA%\\audacity\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "JetBrains IDEs",
+    "DisplayMatch": ["*IntelliJ*", "*PyCharm*", "*WebStorm*", "*Rider*", "*DataGrip*", "*GoLand*", "*RubyMine*", "*CLion*", "*PhpStorm*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\JetBrains\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Cursor IDE",
+    "DisplayMatch": ["*Cursor*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\Cursor\\User\\settings.json",
+      "%APPDATA%\\Cursor\\User\\keybindings.json"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Windows Quick Access Pins",
+    "DisplayMatch": ["__always__"],
+    "Category": "System",
+    "Files": [
+      "%APPDATA%\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\",
+      "%APPDATA%\\Microsoft\\Windows\\Recent\\CustomDestinations\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Startup Programs",
+    "DisplayMatch": ["__always__"],
+    "Category": "System",
+    "Files": [
+      "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
+    ]
+  },
+  {
+    "Name": "AutoCAD",
+    "DisplayMatch": ["*AutoCAD*", "*Autodesk*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Autodesk\\",
+      "%LOCALAPPDATA%\\Autodesk\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Autodesk"
+    ]
+  },
+  {
+    "Name": "LibreOffice",
+    "DisplayMatch": ["*LibreOffice*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\LibreOffice\\4\\user\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Foxit PDF Reader",
+    "DisplayMatch": ["*Foxit*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Foxit Software\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Foxit Software"
+    ]
+  },
+  {
+    "Name": "PDF-XChange Editor",
+    "DisplayMatch": ["*PDF-XChange*", "*PDFXChange*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Tracker Software\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Tracker Software"
+    ]
+  },
+  {
+    "Name": "SumatraPDF",
+    "DisplayMatch": ["*SumatraPDF*", "*Sumatra PDF*"],
+    "Category": "Productivity",
+    "Files": [
+      "%LOCALAPPDATA%\\SumatraPDF\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "IrfanView",
+    "DisplayMatch": ["*IrfanView*"],
+    "Category": "Media",
+    "Files": [
+      "%APPDATA%\\IrfanView\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\IrfanView"
+    ]
+  },
+  {
+    "Name": "Inkscape",
+    "DisplayMatch": ["*Inkscape*"],
+    "Category": "Creative",
+    "Files": [
+      "%APPDATA%\\inkscape\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Krita",
+    "DisplayMatch": ["*Krita*"],
+    "Category": "Creative",
+    "Files": [
+      "%APPDATA%\\krita\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Blender",
+    "DisplayMatch": ["*Blender*"],
+    "Category": "Creative",
+    "Files": [
+      "%APPDATA%\\Blender Foundation\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "HandBrake",
+    "DisplayMatch": ["*HandBrake*"],
+    "Category": "Media",
+    "Files": [
+      "%APPDATA%\\HandBrake\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Camtasia",
+    "DisplayMatch": ["*Camtasia*"],
+    "Category": "Media",
+    "Files": [
+      "%APPDATA%\\TechSmith\\Camtasia Studio\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\TechSmith\\Camtasia Studio"
+    ]
+  },
+  {
+    "Name": "iTunes",
+    "DisplayMatch": ["*iTunes*"],
+    "Category": "Media",
+    "Files": [
+      "%APPDATA%\\Apple Computer\\iTunes\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Apple Computer, Inc.\\iTunes"
+    ]
+  },
+  {
+    "Name": "foobar2000",
+    "DisplayMatch": ["*foobar2000*"],
+    "Category": "Media",
+    "Files": [
+      "%APPDATA%\\foobar2000\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "MediaMonkey",
+    "DisplayMatch": ["*MediaMonkey*"],
+    "Category": "Media",
+    "Files": [
+      "%APPDATA%\\MediaMonkey\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "MusicBee",
+    "DisplayMatch": ["*MusicBee*"],
+    "Category": "Media",
+    "Files": [
+      "%APPDATA%\\MusicBee\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Calibre",
+    "DisplayMatch": ["*Calibre*", "*calibre*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\calibre\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Evernote",
+    "DisplayMatch": ["*Evernote*"],
+    "Category": "Productivity",
+    "Files": [
+      "%LOCALAPPDATA%\\Evernote\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Evernote"
+    ]
+  },
+  {
+    "Name": "TeamViewer",
+    "DisplayMatch": ["*TeamViewer*"],
+    "Category": "Remote Access",
+    "Files": [
+      "%APPDATA%\\TeamViewer\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\TeamViewer"
+    ]
+  },
+  {
+    "Name": "AnyDesk",
+    "DisplayMatch": ["*AnyDesk*"],
+    "Category": "Remote Access",
+    "Files": [
+      "%APPDATA%\\AnyDesk\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\AnyDesk"
+    ]
+  },
+  {
+    "Name": "SecureCRT",
+    "DisplayMatch": ["*SecureCRT*", "*SecureFX*"],
+    "Category": "Remote Access",
+    "Files": [
+      "%APPDATA%\\VanDyke\\Config\\",
+      "%APPDATA%\\VanDyke\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\VanDyke"
+    ]
+  },
+  {
+    "Name": "Cisco AnyConnect VPN",
+    "DisplayMatch": ["*Cisco AnyConnect*", "*AnyConnect*"],
+    "Category": "Network",
+    "Files": [
+      "%LOCALAPPDATA%\\Cisco\\Cisco AnyConnect\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Cisco\\Cisco AnyConnect"
+    ]
+  },
+  {
+    "Name": "Cisco WebEx",
+    "DisplayMatch": ["*WebEx*", "*Webex*"],
+    "Category": "Communication",
+    "Files": [
+      "%LOCALAPPDATA%\\WebEx\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\WebEx"
+    ]
+  },
+  {
+    "Name": "SAP GUI",
+    "DisplayMatch": ["*SAP GUI*", "*SAP Business*", "*SAP Logon*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\SAP\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\SAP"
+    ]
+  },
+  {
+    "Name": "Tableau",
+    "DisplayMatch": ["*Tableau*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Tableau\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Eclipse IDE",
+    "DisplayMatch": ["*Eclipse*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\eclipse\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Android Studio",
+    "DisplayMatch": ["*Android Studio*"],
+    "Category": "Development",
+    "Files": [
+      "%USERPROFILE%\\.android\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Google\\AndroidStudio"
+    ]
+  },
+  {
+    "Name": "WinMerge",
+    "DisplayMatch": ["*WinMerge*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\WinMerge\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "WinZip",
+    "DisplayMatch": ["*WinZip*"],
+    "Category": "Utilities",
+    "Files": [
+      "%APPDATA%\\WinZip\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Nico Mak Computing\\WinZip"
+    ]
+  },
+  {
+    "Name": "Skype",
+    "DisplayMatch": ["*Skype*"],
+    "Category": "Communication",
+    "Files": [
+      "%APPDATA%\\Microsoft\\Skype for Desktop\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Microsoft\\Skype"
+    ]
+  },
+  {
+    "Name": "Wireshark",
+    "DisplayMatch": ["*Wireshark*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\Wireshark\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "qBittorrent",
+    "DisplayMatch": ["*qBittorrent*"],
+    "Category": "Utilities",
+    "Files": [
+      "%APPDATA%\\qBittorrent\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "ShareX",
+    "DisplayMatch": ["*ShareX*"],
+    "Category": "Productivity",
+    "Files": [
+      "%USERPROFILE%\\Documents\\ShareX\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "f.lux",
+    "DisplayMatch": ["*f.lux*", "*flux*"],
+    "Category": "Utilities",
+    "Files": [
+      "%LOCALAPPDATA%\\FluxSoftware\\Flux\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Ditto Clipboard Manager",
+    "DisplayMatch": ["*Ditto*"],
+    "Category": "Utilities",
+    "Files": [
+      "%APPDATA%\\Ditto\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "CCleaner",
+    "DisplayMatch": ["*CCleaner*"],
+    "Category": "Utilities",
+    "Files": [
+      "%APPDATA%\\Piriform\\CCleaner\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "RDP Connection History",
+    "DisplayMatch": ["__always__"],
+    "Category": "System",
+    "Files": [
+      "%LOCALAPPDATA%\\Microsoft\\Terminal Server Client\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Microsoft\\Terminal Server Client"
+    ]
+  },
+  {
+    "Name": "Mapped Network Drives",
+    "DisplayMatch": ["__always__"],
+    "Category": "System",
+    "Files": [],
+    "Registry": [
+      "HKCU:\\Network"
+    ]
+  }
+]

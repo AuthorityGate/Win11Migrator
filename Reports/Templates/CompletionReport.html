@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win11Migrator - Migration Completion Report</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            color: #1a1a2e;
+            line-height: 1.6;
+            padding: 0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+            color: #ffffff;
+            padding: 32px 40px;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            background: #ffffff;
+            border-bottom: 1px solid #e1e4e8;
+            padding: 16px 40px;
+            font-size: 13px;
+            color: #586069;
+        }
+
+        .meta-bar .meta-item strong {
+            color: #24292e;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 24px auto;
+            padding: 0 24px 40px;
+        }
+
+        /* --- Summary Stats Cards --- */
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            flex: 1 1 140px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e1e4e8;
+            padding: 20px;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .stat-card .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .stat-card .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #586069;
+            margin-top: 4px;
+        }
+
+        .stat-total  .stat-value { color: #0078d4; }
+        .stat-success .stat-value { color: #28a745; }
+        .stat-failed  .stat-value { color: #dc3545; }
+        .stat-manual  .stat-value { color: #ffc107; }
+        .stat-skipped .stat-value { color: #6c757d; }
+
+        /* --- Pie Chart (Pure CSS) --- */
+        .chart-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .chart-card {
+            flex: 1 1 280px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e1e4e8;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .chart-card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+
+        .pie-container {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            position: relative;
+        }
+
+        .pie-container .pie-center {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px; height: 80px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: #24292e;
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-size: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .color-success { background: #28a745; }
+        .color-failed  { background: #dc3545; }
+        .color-manual  { background: #ffc107; }
+        .color-skipped { background: #6c757d; }
+        .color-pending { background: #adb5bd; }
+
+        /* --- Section --- */
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #24292e;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #0078d4;
+        }
+
+        /* --- Tables --- */
+        .data-table {
+            width: 100%;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e1e4e8;
+            border-collapse: collapse;
+        }
+
+        .data-table thead {
+            background: #f6f8fa;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 10px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #586069;
+            border-bottom: 2px solid #e1e4e8;
+        }
+
+        .data-table td {
+            padding: 10px 16px;
+            font-size: 13px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f6f8fa;
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* --- Status Badges --- */
+        .status-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-success { background: #d4edda; color: #155724; }
+        .badge-failed  { background: #f8d7da; color: #721c24; }
+        .badge-manual  { background: #fff3cd; color: #856404; }
+        .badge-skipped { background: #e2e3e5; color: #383d41; }
+        .badge-pending { background: #e2e3e5; color: #383d41; }
+
+        .footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 12px;
+            color: #8b949e;
+        }
+
+        @media print {
+            body { background: #fff; }
+            .header { background: #0078d4 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .stat-card, .chart-card, .data-table { break-inside: avoid; }
+            .container { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Migration Completion Report</h1>
+        <div class="subtitle">Win11Migrator - Full migration summary</div>
+    </div>
+
+    <div class="meta-bar">
+        <div class="meta-item"><strong>Source Computer:</strong> {{SOURCE_COMPUTER}}</div>
+        <div class="meta-item"><strong>Target Computer:</strong> {{TARGET_COMPUTER}}</div>
+        <div class="meta-item"><strong>Report Date:</strong> {{EXPORT_DATE}}</div>
+    </div>
+
+    <div class="container">
+        {{SUMMARY_STATS}}
+
+        <div class="chart-row">
+            {{CHART_SECTION}}
+        </div>
+
+        <!-- Applications Section -->
+        <div class="section">
+            <h2 class="section-title">Applications</h2>
+            {{APP_SECTION}}
+        </div>
+
+        <!-- User Data Section -->
+        <div class="section">
+            <h2 class="section-title">User Data</h2>
+            {{DATA_SECTION}}
+        </div>
+
+        <!-- Browser Profiles Section -->
+        <div class="section">
+            <h2 class="section-title">Browser Profiles</h2>
+            {{BROWSER_SECTION}}
+        </div>
+
+        <!-- System Settings Section -->
+        <div class="section">
+            <h2 class="section-title">System Settings</h2>
+            {{SETTINGS_SECTION}}
+        </div>
+
+        {{CROSS_OS_SECTION}}
+    </div>
+
+    <div class="footer">
+        Generated by Win11Migrator &mdash; {{EXPORT_DATE}}
+    </div>
+</body>
+</html>

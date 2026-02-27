@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win11Migrator - Manual Installation Report</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            color: #1a1a2e;
+            line-height: 1.6;
+            padding: 0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+            color: #ffffff;
+            padding: 32px 40px;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            background: #ffffff;
+            border-bottom: 1px solid #e1e4e8;
+            padding: 16px 40px;
+            font-size: 13px;
+            color: #586069;
+        }
+
+        .meta-bar .meta-item strong {
+            color: #24292e;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 24px auto;
+            padding: 0 24px;
+        }
+
+        .summary-card {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+
+        .summary-card h2 {
+            font-size: 16px;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .summary-card p {
+            font-size: 14px;
+            color: #664d03;
+        }
+
+        .app-table {
+            width: 100%;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e1e4e8;
+            border-collapse: collapse;
+        }
+
+        .app-table thead {
+            background: #f6f8fa;
+        }
+
+        .app-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #586069;
+            border-bottom: 2px solid #e1e4e8;
+        }
+
+        .app-table td {
+            padding: 12px 16px;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+
+        .app-table tbody tr:hover {
+            background: #f6f8fa;
+        }
+
+        .app-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .reason-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .reason-manual {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .reason-failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .download-link {
+            color: #0078d4;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .download-link:hover {
+            text-decoration: underline;
+        }
+
+        .no-url {
+            color: #adb5bd;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 12px;
+            color: #8b949e;
+        }
+
+        @media print {
+            body { background: #fff; }
+            .header { background: #0078d4 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .container { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Manual Installation Required</h1>
+        <div class="subtitle">Win11Migrator - Applications that need manual action on the target machine</div>
+    </div>
+
+    <div class="meta-bar">
+        <div class="meta-item"><strong>Source Computer:</strong> {{SOURCE_COMPUTER}}</div>
+        <div class="meta-item"><strong>Export Date:</strong> {{EXPORT_DATE}}</div>
+        <div class="meta-item"><strong>Total Manual Apps:</strong> {{TOTAL_COUNT}}</div>
+    </div>
+
+    <div class="container">
+        <div class="summary-card">
+            <h2>Action Required</h2>
+            <p>
+                The following {{TOTAL_COUNT}} application(s) could not be installed automatically and require
+                manual installation. Where available, download links have been provided. Please install
+                these applications in order to complete your migration.
+            </p>
+        </div>
+
+        <table class="app-table">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 25%;">Application</th>
+                    <th style="width: 15%;">Version</th>
+                    <th style="width: 15%;">Publisher</th>
+                    <th style="width: 15%;">Reason</th>
+                    <th style="width: 25%;">Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{APP_ROWS}}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        Generated by Win11Migrator &mdash; {{EXPORT_DATE}}
+    </div>
+</body>
+</html>

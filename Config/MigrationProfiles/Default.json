@@ -1,0 +1,33 @@
+{
+  "Name": "Default",
+  "Description": "Complete migration - includes all applications, user data, browsers, and settings",
+  "Apps": {
+    "IncludeAll": true,
+    "ExcludeCategories": []
+  },
+  "UserData": {
+    "Folders": ["Desktop", "Documents", "Downloads", "Pictures", "Music", "Videos", "Favorites"],
+    "IncludeAppData": true
+  },
+  "BrowserProfiles": {
+    "IncludeAll": true
+  },
+  "SystemSettings": {
+    "WiFi": true,
+    "Printers": true,
+    "MappedDrives": true,
+    "EnvVars": true,
+    "WindowsSettings": true,
+    "Accessibility": true,
+    "Regional": true,
+    "VPN": true,
+    "Certificates": true,
+    "ODBC": true,
+    "FolderOptions": true,
+    "InputSettings": true,
+    "Power": true
+  },
+  "AppProfiles": {
+    "IncludeAll": true
+  }
+}

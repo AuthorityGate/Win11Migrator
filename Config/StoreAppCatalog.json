@@ -1,0 +1,118 @@
+{
+  "netflix": {
+    "StoreId": "9WZDNCRFJ3TH",
+    "PackageFamilyName": "4DF9E0F8.Netflix_mcm4njqhnhss8"
+  },
+  "spotify": {
+    "StoreId": "9NCBCSZSJRSB",
+    "PackageFamilyName": "SpotifyAB.SpotifyMusic_zpdnekdrzrea0"
+  },
+  "whatsapp": {
+    "StoreId": "9NKSQGP7F2NH",
+    "PackageFamilyName": "5319275A.WhatsAppDesktop_cv1g1gnamwfma"
+  },
+  "telegram": {
+    "StoreId": "9NZTWSQNTD0S",
+    "PackageFamilyName": "TelegramMessengerLLP.TelegramDesktop_t4vj0pshhgkwm"
+  },
+  "microsoft to do": {
+    "StoreId": "9NBLGGH5R558",
+    "PackageFamilyName": "Microsoft.Todos_8wekyb3d8bbwe"
+  },
+  "microsoft whiteboard": {
+    "StoreId": "9MSPC6MP8FM4",
+    "PackageFamilyName": "Microsoft.Whiteboard_8wekyb3d8bbwe"
+  },
+  "windows terminal": {
+    "StoreId": "9N0DX20HK701",
+    "PackageFamilyName": "Microsoft.WindowsTerminal_8wekyb3d8bbwe"
+  },
+  "xbox": {
+    "StoreId": "9MV0B5HZVK9Z",
+    "PackageFamilyName": "Microsoft.GamingApp_8wekyb3d8bbwe"
+  },
+  "your phone": {
+    "StoreId": "9NMPJ99VJBWV",
+    "PackageFamilyName": "Microsoft.YourPhone_8wekyb3d8bbwe"
+  },
+  "phone link": {
+    "StoreId": "9NMPJ99VJBWV",
+    "PackageFamilyName": "Microsoft.YourPhone_8wekyb3d8bbwe"
+  },
+  "snipping tool": {
+    "StoreId": "9MZ95KL8MR0L",
+    "PackageFamilyName": "Microsoft.ScreenSketch_8wekyb3d8bbwe"
+  },
+  "paint": {
+    "StoreId": "9PCFS5B6T72H",
+    "PackageFamilyName": "Microsoft.Paint_8wekyb3d8bbwe"
+  },
+  "clipchamp": {
+    "StoreId": "9P1J8S7CCWWT",
+    "PackageFamilyName": "Clipchamp.Clipchamp_yxz26nhyzhsrt"
+  },
+  "amazon prime video": {
+    "StoreId": "9P6RC76MSMMJ",
+    "PackageFamilyName": "AmazonVideo.PrimeVideo_pwbj9vvecjh7j"
+  },
+  "disney+": {
+    "StoreId": "9NXQXXLFST89",
+    "PackageFamilyName": "Disney.37853FC22B2CE_6rarf9sa4v8jt"
+  },
+  "apple music": {
+    "StoreId": "9PFHDD62MXS1",
+    "PackageFamilyName": "AppleInc.AppleMusic_nzyj5cx40ttqa"
+  },
+  "apple tv": {
+    "StoreId": "9NM4T8B9JQZ1",
+    "PackageFamilyName": "AppleInc.AppleTV_nzyj5cx40ttqa"
+  },
+  "itunes": {
+    "StoreId": "9PB2MZ1ZMB1S",
+    "PackageFamilyName": "AppleInc.iTunes_nzyj5cx40ttqa"
+  },
+  "canva": {
+    "StoreId": "XP8K17RNMM8MTN",
+    "PackageFamilyName": "Canva.CanvaforWindows_s98y1wbxxhgqp"
+  },
+  "drawboard pdf": {
+    "StoreId": "9WZDNCRFHWQT",
+    "PackageFamilyName": "Drawboard.DrawboardPDF_gk9xvpgvt3pp0"
+  },
+  "eartrumpet": {
+    "StoreId": "9NBLGGH516XP",
+    "PackageFamilyName": "File-New-Project.EarTrumpet_1sdd7yawmg6gg"
+  },
+  "files app": {
+    "StoreId": "9NGHP3DX8HDX",
+    "PackageFamilyName": "49306atecsolution.FilesUWP_et10x9a9g8pvt"
+  },
+  "hbo max": {
+    "StoreId": "9PJJNMWQBSDV",
+    "PackageFamilyName": "WarnerMedia.HBOMax_e7mkpak1kc8qc"
+  },
+  "messenger": {
+    "StoreId": "9WZDNCRF0083",
+    "PackageFamilyName": "FACEBOOK.317180B0BB486_8xx8rvfyw5nnt"
+  },
+  "tiktok": {
+    "StoreId": "9NH2GPH4JZS4",
+    "PackageFamilyName": "BytedancePte.Ltd.TikTok_6yccndn6064se"
+  },
+  "vlc": {
+    "StoreId": "9NBLGGH4VVNH",
+    "PackageFamilyName": "VideoLAN.VLC_paz6r1rewnh8a"
+  },
+  "notion": {
+    "StoreId": "XPDBVSS44R0L9H",
+    "PackageFamilyName": "Notion.Notion_pbn4ck01hs1am"
+  },
+  "onenote": {
+    "StoreId": "XPFFZHVGQWWLHB",
+    "PackageFamilyName": "Microsoft.Office.OneNote_8wekyb3d8bbwe"
+  },
+  "powertoys": {
+    "StoreId": "XP89DCGQ3K6VLD",
+    "PackageFamilyName": "Microsoft.PowerToys_8wekyb3d8bbwe"
+  }
+}

@@ -1,0 +1,37 @@
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Border x:Name="rootBorder" Padding="12,8" Margin="0,1" Background="Transparent"
+            BorderBrush="#E8E8E8" BorderThickness="0,0,0,1" Cursor="Hand">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="80" />
+            </Grid.ColumnDefinitions>
+
+            <CheckBox x:Name="chkSelected" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,12,0"
+                      IsChecked="True" />
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock x:Name="txtAppName" FontSize="14" FontFamily="Segoe UI"
+                           Foreground="#1A1A1A" TextTrimming="CharacterEllipsis" />
+                <TextBlock x:Name="txtPublisher" FontSize="11" FontFamily="Segoe UI"
+                           Foreground="#605E5C" TextTrimming="CharacterEllipsis" />
+            </StackPanel>
+
+            <TextBlock x:Name="txtVersion" Grid.Column="2" VerticalAlignment="Center"
+                       FontSize="12" FontFamily="Segoe UI" Foreground="#605E5C" />
+
+            <Border x:Name="badgeMethod" Grid.Column="3" VerticalAlignment="Center"
+                    CornerRadius="10" Padding="8,3" HorizontalAlignment="Center">
+                <TextBlock x:Name="txtMethod" FontSize="11" FontFamily="Segoe UI" FontWeight="SemiBold" />
+            </Border>
+
+            <TextBlock x:Name="txtSource" Grid.Column="4" VerticalAlignment="Center"
+                       FontSize="11" FontFamily="Segoe UI" Foreground="#A19F9D" HorizontalAlignment="Center" />
+        </Grid>
+    </Border>
+</UserControl>

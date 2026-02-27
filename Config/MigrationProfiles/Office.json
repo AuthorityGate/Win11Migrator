@@ -1,0 +1,33 @@
+{
+  "Name": "Office",
+  "Description": "Office worker - Office apps, browser data, printers, and mapped drives",
+  "Apps": {
+    "IncludeAll": true,
+    "ExcludeCategories": []
+  },
+  "UserData": {
+    "Folders": ["Desktop", "Documents", "Downloads", "Favorites"],
+    "IncludeAppData": false
+  },
+  "BrowserProfiles": {
+    "IncludeAll": true
+  },
+  "SystemSettings": {
+    "WiFi": true,
+    "Printers": true,
+    "MappedDrives": true,
+    "EnvVars": false,
+    "WindowsSettings": true,
+    "Accessibility": true,
+    "Regional": true,
+    "VPN": false,
+    "Certificates": false,
+    "ODBC": true,
+    "FolderOptions": true,
+    "InputSettings": false,
+    "Power": false
+  },
+  "AppProfiles": {
+    "IncludeAll": false
+  }
+}

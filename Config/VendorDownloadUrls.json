@@ -1,0 +1,171 @@
+{
+  "adobe acrobat reader": {
+    "Url": "https://get.adobe.com/reader/download/?installer=Reader_DC",
+    "SilentArgs": "/sAll /rs /msi EULA_ACCEPT=YES",
+    "InstallerType": "exe"
+  },
+  "adobe reader": {
+    "Url": "https://get.adobe.com/reader/download/?installer=Reader_DC",
+    "SilentArgs": "/sAll /rs /msi EULA_ACCEPT=YES",
+    "InstallerType": "exe"
+  },
+  "autodesk autocad": {
+    "Url": "https://www.autodesk.com/products/autocad/free-trial",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Autodesk account. Download from Autodesk website."
+  },
+  "autocad": {
+    "Url": "https://www.autodesk.com/products/autocad/free-trial",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Autodesk account. Download from Autodesk website."
+  },
+  "beyond compare": {
+    "Url": "https://www.scootersoftware.com/download",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "camtasia": {
+    "Url": "https://www.techsmith.com/camtasia-download.html",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "cisco webex": {
+    "Url": "https://www.webex.com/downloads.html",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "msi"
+  },
+  "citrix workspace": {
+    "Url": "https://www.citrix.com/downloads/workspace-app/windows/workspace-app-for-windows-latest.html",
+    "SilentArgs": "/silent /noreboot",
+    "InstallerType": "exe"
+  },
+  "coreldraw": {
+    "Url": "https://www.coreldraw.com/en/free-trials/",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Corel account. Download from Corel website."
+  },
+  "davinci resolve": {
+    "Url": "https://www.blackmagicdesign.com/products/davinciresolve",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires registration on Blackmagic Design website."
+  },
+  "grammarly": {
+    "Url": "https://www.grammarly.com/desktop/windows",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "logitech options": {
+    "Url": "https://download01.logi.com/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer.exe",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "microsoft office": {
+    "Url": "https://www.office.com/",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Microsoft 365 subscription. Install via office.com or IT deployment."
+  },
+  "microsoft 365": {
+    "Url": "https://www.office.com/",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Microsoft 365 subscription. Install via office.com or IT deployment."
+  },
+  "obs studio": {
+    "Url": "https://obsproject.com/download",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "quickbooks": {
+    "Url": "https://quickbooks.intuit.com/desktop/",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Intuit account. Download from QuickBooks website."
+  },
+  "rhinoceros": {
+    "Url": "https://www.rhino3d.com/download/",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires license. Download from Rhino3D website."
+  },
+  "snagit": {
+    "Url": "https://www.techsmith.com/snagit-download.html",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "solidworks": {
+    "Url": "https://www.solidworks.com/sw/support/downloads.htm",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires SOLIDWORKS account and license."
+  },
+  "tableau": {
+    "Url": "https://www.tableau.com/products/desktop/download",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "exe"
+  },
+  "vmware workstation": {
+    "Url": "https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion",
+    "SilentArgs": "/s /v\"/qn EULAS_AGREED=1 AUTOSOFTWAREUPDATE=0\"",
+    "InstallerType": "exe"
+  },
+  "wireshark": {
+    "Url": "https://www.wireshark.org/download.html",
+    "SilentArgs": "/S /desktopicon=yes",
+    "InstallerType": "exe"
+  },
+  "webstorm": {
+    "Url": "https://www.jetbrains.com/webstorm/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "intellij idea": {
+    "Url": "https://www.jetbrains.com/idea/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "pycharm": {
+    "Url": "https://www.jetbrains.com/pycharm/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "datagrip": {
+    "Url": "https://www.jetbrains.com/datagrip/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "rider": {
+    "Url": "https://www.jetbrains.com/rider/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "postman": {
+    "Url": "https://www.postman.com/downloads/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "power bi desktop": {
+    "Url": "https://www.microsoft.com/en-us/download/details.aspx?id=58494",
+    "SilentArgs": "-quiet -norestart ACCEPT_EULA=1",
+    "InstallerType": "msi"
+  },
+  "pgadmin": {
+    "Url": "https://www.pgadmin.org/download/pgadmin-4-windows/",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "robo 3t": {
+    "Url": "https://robomongo.org/download",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "mongodb compass": {
+    "Url": "https://www.mongodb.com/try/download/compass",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "msi"
+  }
+}

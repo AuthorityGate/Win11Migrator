@@ -1,0 +1,33 @@
+{
+  "Name": "Developer",
+  "Description": "Developer workstation - IDEs, Git config, SSH keys, terminal settings, and source code",
+  "Apps": {
+    "IncludeAll": true,
+    "ExcludeCategories": []
+  },
+  "UserData": {
+    "Folders": ["Desktop", "Documents", "Downloads"],
+    "IncludeAppData": true
+  },
+  "BrowserProfiles": {
+    "IncludeAll": true
+  },
+  "SystemSettings": {
+    "WiFi": true,
+    "Printers": false,
+    "MappedDrives": true,
+    "EnvVars": true,
+    "WindowsSettings": false,
+    "Accessibility": false,
+    "Regional": true,
+    "VPN": true,
+    "Certificates": true,
+    "ODBC": true,
+    "FolderOptions": true,
+    "InputSettings": false,
+    "Power": false
+  },
+  "AppProfiles": {
+    "IncludeAll": true
+  }
+}

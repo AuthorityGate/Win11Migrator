@@ -1,0 +1,118 @@
+<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Data Selection">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/Colors.xaml" />
+                <ResourceDictionary Source="../Styles/Typography.xaml" />
+                <ResourceDictionary Source="../Styles/Controls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="#F5F0E6" Margin="48,24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Select Data to Migrate" Style="{StaticResource SubtitleText}" Margin="0,0,0,4" />
+        <TextBlock Grid.Row="1" Text="Choose which user data, browser profiles, and system settings to include."
+                   Style="{StaticResource BodyText}" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,24" />
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <!-- Cloud Sync Info Banner (hidden by default, shown when cloud folders detected) -->
+                <Border x:Name="panelCloudSync" Visibility="Collapsed"
+                        Background="#E8F4FD" BorderBrush="#4A90D9" BorderThickness="1" CornerRadius="6" Padding="16" Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock x:Name="txtCloudSyncInfo" TextWrapping="Wrap" FontSize="13" Foreground="#1A5276"
+                                   Text="Some of your folders are synced to the cloud. You can choose to copy the data into the migration package, or skip copying and let the cloud service re-sync on the new PC." />
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Button x:Name="btnCloudCopyAll" Content="Copy All Cloud Folders" Padding="12,6" Margin="0,0,8,0" FontSize="12" />
+                            <Button x:Name="btnCloudSkipAll" Content="Skip All (Re-sync from Cloud)" Padding="12,6" FontSize="12" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- User Data Section -->
+                <Border Style="{StaticResource CardPanel}">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="User Data Folders" Style="{StaticResource HeadingText}" VerticalAlignment="Center" />
+                            <Button x:Name="btnAddFolder" Grid.Column="1" Content="Add Folder" Padding="12,4" FontSize="12" />
+                        </Grid>
+                        <StackPanel x:Name="panelUserData" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Application Profiles Section -->
+                <Border Style="{StaticResource CardPanel}">
+                    <StackPanel>
+                        <TextBlock Text="Application Profiles" Style="{StaticResource HeadingText}" Margin="0,0,0,12" />
+                        <StackPanel x:Name="panelAppProfiles" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Browser Profiles Section -->
+                <Border Style="{StaticResource CardPanel}">
+                    <StackPanel>
+                        <TextBlock Text="Browser Profiles" Style="{StaticResource HeadingText}" Margin="0,0,0,12" />
+                        <StackPanel x:Name="panelBrowsers" />
+                    </StackPanel>
+                </Border>
+
+                <!-- System Settings Section -->
+                <Border Style="{StaticResource CardPanel}">
+                    <StackPanel>
+                        <TextBlock Text="System Settings" Style="{StaticResource HeadingText}" Margin="0,0,0,12" />
+                        <CheckBox x:Name="chkWiFi" Content="WiFi Profiles" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                        <CheckBox x:Name="chkPrinters" Content="Printer Configurations" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                        <CheckBox x:Name="chkDrives" Content="Mapped Network Drives" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                        <CheckBox x:Name="chkEnvVars" Content="Environment Variables" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                        <CheckBox x:Name="chkWinSettings" Content="Windows Settings (File associations, Taskbar)" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                        <CheckBox x:Name="chkAccessibility" Content="Accessibility Settings" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                        <CheckBox x:Name="chkRegional" Content="Regional / Locale Settings" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                        <CheckBox x:Name="chkVPN" Content="VPN Connections" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                        <CheckBox x:Name="chkCertificates" Content="User Certificates" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                        <CheckBox x:Name="chkODBC" Content="ODBC Data Sources" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                        <CheckBox x:Name="chkFolderOptions" Content="Folder Options" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                        <CheckBox x:Name="chkInputSettings" Content="Keyboard / Mouse Settings" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                        <CheckBox x:Name="chkPower" Content="Power Plan" Style="{StaticResource MigratorCheckBox}" IsChecked="True" />
+                    </StackPanel>
+                </Border>
+
+                <!-- EFS Warning Banner (hidden by default, shown when EFS-encrypted files detected) -->
+                <Border x:Name="panelEFSWarning" Visibility="Collapsed"
+                        Background="#FFF3CD" BorderBrush="#FFC107" BorderThickness="1" CornerRadius="6" Padding="16" Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock x:Name="txtEFSWarning" TextWrapping="Wrap" FontSize="13" Foreground="#856404"
+                                   Text="EFS-encrypted files detected. These files cannot be migrated without the EFS certificate. Export your EFS certificate before proceeding." />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Total Size -->
+        <Border Grid.Row="3" Background="{StaticResource SurfaceBrush}" CornerRadius="4" Padding="16,8" Margin="0,8,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Estimated package size:" Style="{StaticResource BodyText}" />
+                <TextBlock x:Name="txtTotalSize" Grid.Column="1" Text="Calculating..."
+                           Style="{StaticResource HeadingText}" Foreground="{StaticResource PrimaryBrush}" />
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
