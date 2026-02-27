@@ -549,12 +549,52 @@ function Initialize-ScanProgressPage {
                         function Write-MigrationLog { param([string]$Message, [string]$Level = 'Info') Write-Host "[$Level] $Message" }
                         $script:MigratorRoot = $migratorRoot
 
+                        # Load WingetIdMap for static lookup (highest priority)
+                        $wingetIdMap = @{}
+                        $mapPath = Join-Path $migratorRoot "Config\WingetIdMap.json"
+                        if (Test-Path $mapPath) {
+                            try {
+                                $mapRaw = Get-Content $mapPath -Raw | ConvertFrom-Json
+                                $mapRaw.PSObject.Properties | Where-Object { $_.Name -notlike '_*' } | ForEach-Object {
+                                    $wingetIdMap[$_.Name] = $_.Value
+                                }
+                            } catch {}
+                        }
+
                         foreach ($item in $appData) {
                             $shared.Current++
                             $name = $item.Name
                             $normName = $item.NormName
                             if ([string]::IsNullOrWhiteSpace($normName)) {
                                 $normName = Get-NormalizedAppName -Name $name
+                            }
+
+                            # Try WingetIdMap (static, highest priority)
+                            if ($wingetIdMap.Count -gt 0) {
+                                # Exact match
+                                $lookupKeys = @($normName, $name.ToLower().Trim()) | Select-Object -Unique
+                                $wingetMatch = $null
+                                foreach ($key in $lookupKeys) {
+                                    if ($wingetIdMap.ContainsKey($key)) {
+                                        $wingetMatch = @{ PackageId = $wingetIdMap[$key]; Confidence = 0.95 }
+                                        break
+                                    }
+                                }
+                                # Fuzzy match if no exact hit
+                                if (-not $wingetMatch) {
+                                    $bestKey = ''; $bestSim = 0.0
+                                    foreach ($key in $wingetIdMap.Keys) {
+                                        $sim = Get-AppNameSimilarity -Name1 $normName -Name2 $key
+                                        if ($sim -gt $bestSim) { $bestSim = $sim; $bestKey = $key }
+                                    }
+                                    if ($bestSim -ge 0.6 -and $bestKey) {
+                                        $wingetMatch = @{ PackageId = $wingetIdMap[$bestKey]; Confidence = $bestSim }
+                                    }
+                                }
+                                if ($wingetMatch) {
+                                    $null = $shared.Results.Add(@{ Index = $item.Index; Method = 'Winget'; PackageId = $wingetMatch.PackageId; Confidence = $wingetMatch.Confidence; NormName = $normName })
+                                    continue
+                                }
                             }
 
                             # Try Ninite
