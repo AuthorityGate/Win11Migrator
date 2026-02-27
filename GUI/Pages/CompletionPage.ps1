@@ -84,7 +84,7 @@ function Initialize-CompletionPage {
 
         # Show target-specific next-step instructions
         $exportStepsText = $null
-        $storageTarget = if ($State.StorageTarget) { $State.StorageTarget } else { '' }
+        $storageTarget = if ($State.StorageTarget.Type) { $State.StorageTarget.Type } elseif ($State.StorageTarget -is [string]) { $State.StorageTarget } else { '' }
 
         switch ($storageTarget) {
             'USB' {
