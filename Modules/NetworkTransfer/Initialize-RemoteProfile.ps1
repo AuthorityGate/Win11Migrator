@@ -5,7 +5,7 @@
     Description:    Creates or resolves a user profile on the target machine for direct network migration.
     Author:         Kevin Komlosy
     Company:        AuthorityGate Inc.
-    Version:        1.0.0
+    Version:        1.1.0
     Date:           February 27, 2026
 
     License:        MIT License (GitHub Freeware)
@@ -17,10 +17,11 @@
 .SYNOPSIS
     Creates or resolves a user profile on the target machine.
 .DESCRIPTION
-    Establishes a PSSession to the target computer and checks whether the specified
-    user already has a profile. If the profile exists, its path and SID are resolved.
-    If not, the function attempts to create the profile directory structure on the
-    target machine so that migration data can be pushed to it.
+    Checks whether the specified user already has a profile on the target by probing
+    the UNC admin share (\\ComputerName\C$\Users\TargetUser). This approach works
+    with just admin share access and does NOT require WinRM/PSRemoting.
+    If the profile directory exists, it is used as-is (overwrite mode).
+    If not, the function creates the directory structure via UNC.
 .PARAMETER ComputerName
     Hostname or IP address of the target computer.
 .PARAMETER Credential
@@ -28,7 +29,7 @@
 .PARAMETER TargetUserName
     The username whose profile should be resolved or created on the target.
 .OUTPUTS
-    [hashtable] With ProfilePath, UserSID, ProfileExists, Created, ErrorMessage keys.
+    [hashtable] With ProfilePath, ProfileExists, Created, ErrorMessage keys.
 .EXAMPLE
     $cred = Get-Credential
     $profile = Initialize-RemoteProfile -ComputerName 'TARGET-PC' -Credential $cred -TargetUserName 'john'
@@ -51,161 +52,93 @@ function Initialize-RemoteProfile {
 
     $result = @{
         ProfilePath   = ''
-        UserSID       = ''
         ProfileExists = $false
         Created       = $false
         ErrorMessage  = ''
     }
 
-    $session = $null
+    # Map a temporary PSDrive with credentials for UNC access
+    $driveName = "MigratorProf_$(Get-Random)"
+    $uncRoot = "\\$ComputerName\C`$"
+
+    try {
+        $null = New-PSDrive -Name $driveName -PSProvider FileSystem -Root $uncRoot -Credential $Credential -ErrorAction Stop
+        Write-MigrationLog -Message "Mapped drive to $uncRoot for profile check" -Level Debug
+    } catch {
+        $result.ErrorMessage = "Cannot access admin share on '$ComputerName': $($_.Exception.Message)"
+        Write-MigrationLog -Message $result.ErrorMessage -Level Error
+        return $result
+    }
+
     try {
         # -----------------------------------------------------------------
-        # 1. Establish PSSession to target
+        # 1. Check if user profile directory exists via UNC
         # -----------------------------------------------------------------
-        Write-MigrationLog -Message "Establishing PSSession to '$ComputerName'" -Level Debug
-        $session = New-PSSession -ComputerName $ComputerName -Credential $Credential -ErrorAction Stop
-        Write-MigrationLog -Message "PSSession established to '$ComputerName'" -Level Info
+        $uncUsersDir = "${driveName}:\Users"
+        $uncProfilePath = Join-Path $uncUsersDir $TargetUserName
 
-        # -----------------------------------------------------------------
-        # 2. Check if user profile exists via remote registry
-        # -----------------------------------------------------------------
-        Write-MigrationLog -Message "Checking for existing profile for '$TargetUserName'" -Level Debug
-        $remoteResult = Invoke-Command -Session $session -ScriptBlock {
-            param($userName)
+        if (Test-Path $uncProfilePath) {
+            # Profile exists — use it as-is (overwrite mode)
+            $result.ProfilePath   = "C:\Users\$TargetUserName"
+            $result.ProfileExists = $true
+            Write-MigrationLog -Message "Existing profile found for '$TargetUserName' at '$($result.ProfilePath)'" -Level Info
+        } else {
+            # -----------------------------------------------------------------
+            # 2. Profile doesn't exist — scan Users directory for case variations
+            # -----------------------------------------------------------------
+            Write-MigrationLog -Message "No exact match for '$TargetUserName', scanning Users directory" -Level Debug
+            $existingUsers = Get-ChildItem -Path $uncUsersDir -Directory -ErrorAction SilentlyContinue
+            $matched = $existingUsers | Where-Object { $_.Name -ieq $TargetUserName } | Select-Object -First 1
 
-            $profileInfo = @{
-                ProfilePath   = ''
-                UserSID       = ''
-                ProfileExists = $false
+            if ($matched) {
+                $result.ProfilePath   = "C:\Users\$($matched.Name)"
+                $result.ProfileExists = $true
+                Write-MigrationLog -Message "Profile found (case-insensitive) for '$TargetUserName' as '$($matched.Name)'" -Level Info
             }
-
-            # Enumerate profile list from registry
-            $profileListPath = 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList'
-            $profileKeys = Get-ChildItem -Path $profileListPath -ErrorAction SilentlyContinue
-
-            foreach ($key in $profileKeys) {
-                $sid = Split-Path $key.PSPath -Leaf
-                $profileImagePath = (Get-ItemProperty -Path $key.PSPath -Name 'ProfileImagePath' -ErrorAction SilentlyContinue).ProfileImagePath
-
-                if ($profileImagePath) {
-                    $profileName = Split-Path $profileImagePath -Leaf
-                    if ($profileName -eq $userName) {
-                        $profileInfo.ProfilePath   = $profileImagePath
-                        $profileInfo.UserSID       = $sid
-                        $profileInfo.ProfileExists = $true
-                        break
-                    }
-                }
-            }
-
-            # Also check by matching against local/domain accounts
-            if (-not $profileInfo.ProfileExists) {
-                try {
-                    $account = New-Object System.Security.Principal.NTAccount($userName)
-                    $sidObj  = $account.Translate([System.Security.Principal.SecurityIdentifier])
-                    $sidStr  = $sidObj.Value
-
-                    foreach ($key in $profileKeys) {
-                        $keySid = Split-Path $key.PSPath -Leaf
-                        if ($keySid -eq $sidStr) {
-                            $profileInfo.ProfilePath   = (Get-ItemProperty -Path $key.PSPath -Name 'ProfileImagePath' -ErrorAction SilentlyContinue).ProfileImagePath
-                            $profileInfo.UserSID       = $sidStr
-                            $profileInfo.ProfileExists = $true
-                            break
-                        }
-                    }
-                } catch {
-                    # Account SID resolution failed
-                }
-            }
-
-            return $profileInfo
-        } -ArgumentList $TargetUserName -ErrorAction Stop
-
-        $result.ProfilePath   = $remoteResult.ProfilePath
-        $result.UserSID       = $remoteResult.UserSID
-        $result.ProfileExists = $remoteResult.ProfileExists
+        }
 
         # -----------------------------------------------------------------
-        # 3. If profile exists, confirm path is valid
+        # 3. Verify standard subdirectories exist, create any that are missing
         # -----------------------------------------------------------------
         if ($result.ProfileExists) {
-            Write-MigrationLog -Message "Profile found for '$TargetUserName' at '$($result.ProfilePath)' (SID: $($result.UserSID))" -Level Info
-
-            # Verify path exists on remote
-            $pathExists = Invoke-Command -Session $session -ScriptBlock {
-                param($path)
-                Test-Path $path
-            } -ArgumentList $result.ProfilePath -ErrorAction Stop
-
-            if (-not $pathExists) {
-                Write-MigrationLog -Message "Profile registry entry exists but path '$($result.ProfilePath)' is missing, will recreate" -Level Warning
-                $result.ProfileExists = $false
+            # Profile exists — ensure standard subdirectories are present
+            $subDirs = @('Desktop', 'Documents', 'Downloads', 'Pictures', 'Music', 'Videos',
+                         'AppData', 'AppData\Local', 'AppData\Roaming', 'AppData\LocalLow')
+            foreach ($sub in $subDirs) {
+                $subPath = Join-Path $uncProfilePath $sub
+                if (-not (Test-Path $subPath)) {
+                    New-Item -Path $subPath -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
+                }
             }
-        }
+            Write-MigrationLog -Message "Profile directory verified with standard subdirectories" -Level Debug
+        } else {
+            # -----------------------------------------------------------------
+            # 4. Create new profile directory structure
+            # -----------------------------------------------------------------
+            Write-MigrationLog -Message "Creating new profile directory for '$TargetUserName'" -Level Info
+            try {
+                New-Item -Path $uncProfilePath -ItemType Directory -Force -ErrorAction Stop | Out-Null
 
-        # -----------------------------------------------------------------
-        # 4. If profile doesn't exist, create the directory structure
-        # -----------------------------------------------------------------
-        if (-not $result.ProfileExists) {
-            Write-MigrationLog -Message "No existing profile for '$TargetUserName', creating directory structure" -Level Info
-
-            $createResult = Invoke-Command -Session $session -ScriptBlock {
-                param($userName)
-
-                $profileBase = "$env:SystemDrive\Users\$userName"
-                $created     = $false
-                $errorMsg    = ''
-
-                try {
-                    if (-not (Test-Path $profileBase)) {
-                        New-Item -Path $profileBase -ItemType Directory -Force | Out-Null
-                    }
-
-                    # Create standard profile subdirectories
-                    $subDirs = @('Desktop', 'Documents', 'Downloads', 'Pictures', 'Music', 'Videos',
-                                 'AppData', 'AppData\Local', 'AppData\Roaming', 'AppData\LocalLow')
-                    foreach ($sub in $subDirs) {
-                        $subPath = Join-Path $profileBase $sub
-                        if (-not (Test-Path $subPath)) {
-                            New-Item -Path $subPath -ItemType Directory -Force | Out-Null
-                        }
-                    }
-
-                    $created = $true
-                } catch {
-                    $errorMsg = $_.Exception.Message
+                $subDirs = @('Desktop', 'Documents', 'Downloads', 'Pictures', 'Music', 'Videos',
+                             'AppData', 'AppData\Local', 'AppData\Roaming', 'AppData\LocalLow')
+                foreach ($sub in $subDirs) {
+                    $subPath = Join-Path $uncProfilePath $sub
+                    New-Item -Path $subPath -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
                 }
 
-                return @{
-                    ProfilePath = $profileBase
-                    Created     = $created
-                    ErrorMessage = $errorMsg
-                }
-            } -ArgumentList $TargetUserName -ErrorAction Stop
-
-            $result.ProfilePath  = $createResult.ProfilePath
-            $result.Created      = $createResult.Created
-            $result.ErrorMessage = $createResult.ErrorMessage
-
-            if ($result.Created) {
-                Write-MigrationLog -Message "Created profile directory structure at '$($result.ProfilePath)'" -Level Info
-            } else {
-                Write-MigrationLog -Message "Failed to create profile: $($result.ErrorMessage)" -Level Error
+                $result.ProfilePath = "C:\Users\$TargetUserName"
+                $result.Created = $true
+                Write-MigrationLog -Message "Created profile directory at '$($result.ProfilePath)'" -Level Info
+            } catch {
+                $result.ErrorMessage = "Failed to create profile directory: $($_.Exception.Message)"
+                Write-MigrationLog -Message $result.ErrorMessage -Level Error
             }
         }
-
     } catch {
-        $result.ErrorMessage = "Failed to initialize remote profile: $($_.Exception.Message)"
+        $result.ErrorMessage = "Failed to check/create remote profile: $($_.Exception.Message)"
         Write-MigrationLog -Message $result.ErrorMessage -Level Error
     } finally {
-        # -----------------------------------------------------------------
-        # 5. Clean up PSSession
-        # -----------------------------------------------------------------
-        if ($session) {
-            Remove-PSSession -Session $session -ErrorAction SilentlyContinue
-            Write-MigrationLog -Message "PSSession to '$ComputerName' closed" -Level Debug
-        }
+        Remove-PSDrive -Name $driveName -Force -ErrorAction SilentlyContinue
     }
 
     return $result

@@ -58,6 +58,42 @@ function Search-ChocolateyPackage {
 
     Write-MigrationLog -Message "Searching Chocolatey for: $NormalizedName" -Level Debug
 
+    # --- Phase 0: Static ID map lookup (instant, no CLI/API call) ---
+    if (-not $script:CachedChocolateyIdMap) {
+        $mapPath = Join-Path $script:MigratorRoot "Config\ChocolateyIdMap.json"
+        if (Test-Path $mapPath) {
+            try {
+                $mapRaw = Get-Content $mapPath -Raw | ConvertFrom-Json
+                $script:CachedChocolateyIdMap = @{}
+                $mapRaw.PSObject.Properties | Where-Object { $_.Name -notlike '_*' } | ForEach-Object {
+                    $script:CachedChocolateyIdMap[$_.Name] = $_.Value
+                }
+                Write-MigrationLog -Message "Loaded ChocolateyIdMap with $($script:CachedChocolateyIdMap.Count) entries" -Level Debug
+            } catch {
+                $script:CachedChocolateyIdMap = @{}
+            }
+        } else {
+            $script:CachedChocolateyIdMap = @{}
+        }
+    }
+
+    # Check static map with original name (lowercase) and normalized name
+    $lookupKeys = @($NormalizedName, $AppName.ToLower().Trim()) | Select-Object -Unique
+    foreach ($key in $lookupKeys) {
+        if ($script:CachedChocolateyIdMap.ContainsKey($key)) {
+            $mappedId = $script:CachedChocolateyIdMap[$key]
+            Write-MigrationLog -Message "Chocolatey: static map match '$key' -> '$mappedId'" -Level Debug
+            return [PSCustomObject]@{
+                Found       = $true
+                PackageId   = $mappedId
+                PackageName = $AppName
+                Confidence  = 0.95
+                Source      = 'Chocolatey'
+            }
+        }
+    }
+
+    # --- Phase 1: Dynamic CLI/API search (fallback for unknown apps) ---
     # Try choco CLI first
     $chocoCmd = Get-Command choco -ErrorAction SilentlyContinue
     if ($chocoCmd) {

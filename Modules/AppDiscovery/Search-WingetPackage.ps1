@@ -65,6 +65,42 @@ function Search-WingetPackage {
 
     Write-MigrationLog -Message "Searching winget for: $NormalizedName" -Level Debug
 
+    # --- Phase 0: Static ID map lookup (instant, no CLI call) ---
+    if (-not $script:CachedWingetIdMap) {
+        $mapPath = Join-Path $script:MigratorRoot "Config\WingetIdMap.json"
+        if (Test-Path $mapPath) {
+            try {
+                $mapRaw = Get-Content $mapPath -Raw | ConvertFrom-Json
+                $script:CachedWingetIdMap = @{}
+                $mapRaw.PSObject.Properties | Where-Object { $_.Name -notlike '_*' } | ForEach-Object {
+                    $script:CachedWingetIdMap[$_.Name] = $_.Value
+                }
+                Write-MigrationLog -Message "Loaded WingetIdMap with $($script:CachedWingetIdMap.Count) entries" -Level Debug
+            } catch {
+                $script:CachedWingetIdMap = @{}
+            }
+        } else {
+            $script:CachedWingetIdMap = @{}
+        }
+    }
+
+    # Check static map with original name (lowercase) and normalized name
+    $lookupKeys = @($NormalizedName, $AppName.ToLower().Trim()) | Select-Object -Unique
+    foreach ($key in $lookupKeys) {
+        if ($script:CachedWingetIdMap.ContainsKey($key)) {
+            $mappedId = $script:CachedWingetIdMap[$key]
+            Write-MigrationLog -Message "Winget: static map match '$key' -> '$mappedId'" -Level Debug
+            return [PSCustomObject]@{
+                Found       = $true
+                PackageId   = $mappedId
+                PackageName = $AppName
+                Confidence  = 0.95
+                Source      = 'Winget'
+            }
+        }
+    }
+
+    # --- Phase 1: Dynamic winget search (fallback for unknown apps) ---
     # Execute winget search
     try {
         $rawOutput = & winget search $NormalizedName --accept-source-agreements --disable-interactivity 2>&1

@@ -43,6 +43,8 @@ function Test-RemoteAccess {
         [Parameter(Mandatory)]
         [PSCredential]$Credential,
 
+        [string]$TargetUserName,
+
         [int]$TimeoutMs = 5000
     )
 

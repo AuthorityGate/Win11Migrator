@@ -283,21 +283,39 @@ function Push-MigrationDirect {
     }
 
     # -------------------------------------------------------------------------
-    # 5. Push system settings via Invoke-Command (remote registry writes)
+    # 5. Push system settings (PSSession if available, UNC file-copy fallback)
     # -------------------------------------------------------------------------
     Write-MigrationLog -Message "Pushing system settings to target" -Level Info
     & $updateProgress 'Applying Settings' 55 'Configuring system settings on target...'
 
     $session = $null
+    $sessionAvailable = $false
     try {
         $session = New-PSSession -ComputerName $ComputerName -Credential $Credential -ErrorAction Stop
+        $sessionAvailable = $true
+        Write-MigrationLog -Message "PSSession established to '$ComputerName' for settings push" -Level Info
+    } catch {
+        Write-MigrationLog -Message "PSSession unavailable (WinRM not enabled on target) - using UNC file-copy fallback for settings" -Level Warning
+    }
 
+    # Stage settings files to target via UNC so they can be applied on next login or manually
+    $settingsStagingUNC = "\\$ComputerName\C`$\Users\$TargetUserName\Win11Migrator\Settings"
+    try {
+        if (-not (Test-Path $settingsStagingUNC)) {
+            New-Item -Path $settingsStagingUNC -ItemType Directory -Force -ErrorAction Stop | Out-Null
+        }
+    } catch {
+        Write-MigrationLog -Message "Failed to create settings staging directory: $($_.Exception.Message)" -Level Warning
+    }
+
+    if ($State.ContainsKey('SystemSettings')) {
         # WiFi profiles
-        if ($State.ContainsKey('SystemSettings')) {
-            $wifiSettings = @($State.SystemSettings | Where-Object { $_.Category -eq 'WiFi' -and $_.Selected })
-            foreach ($wifi in $wifiSettings) {
-                try {
-                    if ($wifi.ExportPath -and (Test-Path $wifi.ExportPath)) {
+        $wifiSettings = @($State.SystemSettings | Where-Object { $_.Category -eq 'WiFi' -and $_.Selected })
+        foreach ($wifi in $wifiSettings) {
+            try {
+                if ($wifi.ExportPath -and (Test-Path $wifi.ExportPath)) {
+                    if ($sessionAvailable) {
+                        # Apply directly via PSSession
                         $xmlContent = Get-Content -Path $wifi.ExportPath -Raw -ErrorAction Stop
                         Invoke-Command -Session $session -ScriptBlock {
                             param($xml, $profileName)
@@ -308,19 +326,30 @@ function Push-MigrationDirect {
                         } -ArgumentList $xmlContent, $wifi.Name -ErrorAction Stop
                         $migrationResult.SettingsPushed++
                         Write-MigrationLog -Message "WiFi profile '$($wifi.Name)' applied on target" -Level Info
+                    } else {
+                        # Copy WiFi XML to staging folder for manual import
+                        $wifiStagingDir = Join-Path $settingsStagingUNC 'WiFi'
+                        if (-not (Test-Path $wifiStagingDir)) {
+                            New-Item -Path $wifiStagingDir -ItemType Directory -Force -ErrorAction Stop | Out-Null
+                        }
+                        Copy-Item -Path $wifi.ExportPath -Destination $wifiStagingDir -Force -ErrorAction Stop
+                        $migrationResult.SettingsPushed++
+                        Write-MigrationLog -Message "WiFi profile '$($wifi.Name)' copied to target staging folder" -Level Info
                     }
-                } catch {
-                    $errMsg = "Failed to apply WiFi profile '$($wifi.Name)': $($_.Exception.Message)"
-                    $migrationResult.Errors += $errMsg
-                    Write-MigrationLog -Message $errMsg -Level Warning
                 }
+            } catch {
+                $errMsg = "Failed to push WiFi profile '$($wifi.Name)': $($_.Exception.Message)"
+                $migrationResult.Errors += $errMsg
+                Write-MigrationLog -Message $errMsg -Level Warning
             }
+        }
 
-            # Environment variables
-            $envSettings = @($State.SystemSettings | Where-Object { $_.Category -eq 'EnvironmentVariables' -and $_.Selected })
-            foreach ($envSetting in $envSettings) {
-                try {
-                    if ($envSetting.Data) {
+        # Environment variables
+        $envSettings = @($State.SystemSettings | Where-Object { $_.Category -eq 'EnvironmentVariables' -and $_.Selected })
+        foreach ($envSetting in $envSettings) {
+            try {
+                if ($envSetting.Data) {
+                    if ($sessionAvailable) {
                         Invoke-Command -Session $session -ScriptBlock {
                             param($data)
                             foreach ($entry in $data) {
@@ -329,19 +358,28 @@ function Push-MigrationDirect {
                         } -ArgumentList @(,$envSetting.Data) -ErrorAction Stop
                         $migrationResult.SettingsPushed++
                         Write-MigrationLog -Message "Environment variables applied on target" -Level Info
+                    } else {
+                        # Export env vars as JSON to staging for manual import
+                        $envJson = $envSetting.Data | ConvertTo-Json -Depth 5
+                        $envFile = Join-Path $settingsStagingUNC 'EnvironmentVariables.json'
+                        $envJson | Out-File -FilePath $envFile -Encoding UTF8 -Force
+                        $migrationResult.SettingsPushed++
+                        Write-MigrationLog -Message "Environment variables exported to target staging folder" -Level Info
                     }
-                } catch {
-                    $errMsg = "Failed to apply environment variables: $($_.Exception.Message)"
-                    $migrationResult.Errors += $errMsg
-                    Write-MigrationLog -Message $errMsg -Level Warning
                 }
+            } catch {
+                $errMsg = "Failed to push environment variables: $($_.Exception.Message)"
+                $migrationResult.Errors += $errMsg
+                Write-MigrationLog -Message $errMsg -Level Warning
             }
+        }
 
-            # Mapped drives
-            $driveSettings = @($State.SystemSettings | Where-Object { $_.Category -eq 'MappedDrives' -and $_.Selected })
-            foreach ($drive in $driveSettings) {
-                try {
-                    if ($drive.Data) {
+        # Mapped drives
+        $driveSettings = @($State.SystemSettings | Where-Object { $_.Category -eq 'MappedDrives' -and $_.Selected })
+        foreach ($drive in $driveSettings) {
+            try {
+                if ($drive.Data) {
+                    if ($sessionAvailable) {
                         Invoke-Command -Session $session -ScriptBlock {
                             param($data)
                             foreach ($mapping in $data) {
@@ -350,27 +388,69 @@ function Push-MigrationDirect {
                         } -ArgumentList @(,$drive.Data) -ErrorAction Stop
                         $migrationResult.SettingsPushed++
                         Write-MigrationLog -Message "Mapped drives applied on target" -Level Info
+                    } else {
+                        # Export drive mappings as JSON to staging for manual import
+                        $driveJson = $drive.Data | ConvertTo-Json -Depth 5
+                        $driveFile = Join-Path $settingsStagingUNC 'MappedDrives.json'
+                        $driveJson | Out-File -FilePath $driveFile -Encoding UTF8 -Force
+                        $migrationResult.SettingsPushed++
+                        Write-MigrationLog -Message "Mapped drives exported to target staging folder" -Level Info
                     }
-                } catch {
-                    $errMsg = "Failed to apply mapped drives: $($_.Exception.Message)"
-                    $migrationResult.Errors += $errMsg
-                    Write-MigrationLog -Message $errMsg -Level Warning
                 }
+            } catch {
+                $errMsg = "Failed to push mapped drives: $($_.Exception.Message)"
+                $migrationResult.Errors += $errMsg
+                Write-MigrationLog -Message $errMsg -Level Warning
             }
         }
-    } catch {
-        $errMsg = "Failed to establish session for settings push: $($_.Exception.Message)"
-        $migrationResult.Errors += $errMsg
-        Write-MigrationLog -Message $errMsg -Level Error
+
+        # All other settings (Printers, Screensaver, Personalization, etc.) - copy export files via UNC
+        $otherSettings = @($State.SystemSettings | Where-Object {
+            $_.Selected -and $_.Category -notin @('WiFi', 'EnvironmentVariables', 'MappedDrives')
+        })
+        foreach ($setting in $otherSettings) {
+            try {
+                if ($setting.ExportPath -and (Test-Path $setting.ExportPath)) {
+                    $catDir = Join-Path $settingsStagingUNC $setting.Category
+                    if (-not (Test-Path $catDir)) {
+                        New-Item -Path $catDir -ItemType Directory -Force -ErrorAction Stop | Out-Null
+                    }
+                    # If ExportPath is a directory, robocopy it; otherwise copy the file
+                    if (Test-Path $setting.ExportPath -PathType Container) {
+                        $null = & robocopy "`"$($setting.ExportPath)`"" "`"$catDir`"" /E /R:2 /W:2 /NP /NDL /NJH /NJS 2>&1
+                    } else {
+                        Copy-Item -Path $setting.ExportPath -Destination $catDir -Force -ErrorAction Stop
+                    }
+                    $migrationResult.SettingsPushed++
+                    Write-MigrationLog -Message "Setting '$($setting.Category)/$($setting.Name)' copied to target" -Level Info
+                } elseif ($setting.Data) {
+                    # Export data as JSON to staging
+                    $catDir = Join-Path $settingsStagingUNC $setting.Category
+                    if (-not (Test-Path $catDir)) {
+                        New-Item -Path $catDir -ItemType Directory -Force -ErrorAction Stop | Out-Null
+                    }
+                    $dataJson = $setting.Data | ConvertTo-Json -Depth 10
+                    $safeName = ($setting.Name -replace '[\\/:*?"<>|]', '_')
+                    $dataFile = Join-Path $catDir "$safeName.json"
+                    $dataJson | Out-File -FilePath $dataFile -Encoding UTF8 -Force
+                    $migrationResult.SettingsPushed++
+                    Write-MigrationLog -Message "Setting '$($setting.Category)/$($setting.Name)' data exported to target" -Level Info
+                }
+            } catch {
+                $errMsg = "Failed to push setting '$($setting.Category)/$($setting.Name)': $($_.Exception.Message)"
+                $migrationResult.Errors += $errMsg
+                Write-MigrationLog -Message $errMsg -Level Warning
+            }
+        }
     }
 
     # -------------------------------------------------------------------------
-    # 6. Trigger remote app installs
+    # 6. Trigger remote app installs (requires PSSession)
     # -------------------------------------------------------------------------
     Write-MigrationLog -Message "Triggering remote app installs" -Level Info
     & $updateProgress 'Installing Apps' 65 'Installing applications on target...'
 
-    if ($State.ContainsKey('Apps') -and $session) {
+    if ($State.ContainsKey('Apps') -and $sessionAvailable) {
         $selectedApps = @($State.Apps | Where-Object { $_.Selected })
         if ($selectedApps.Count -gt 0) {
             try {
@@ -381,6 +461,33 @@ function Push-MigrationDirect {
                 $errMsg = "Remote app install failed: $($_.Exception.Message)"
                 $migrationResult.Errors += $errMsg
                 Write-MigrationLog -Message $errMsg -Level Error
+            }
+        }
+    } elseif ($State.ContainsKey('Apps') -and -not $sessionAvailable) {
+        # Write app install list to staging folder so user can run it on target
+        $selectedApps = @($State.Apps | Where-Object { $_.Selected })
+        if ($selectedApps.Count -gt 0) {
+            try {
+                $appListDir = "\\$ComputerName\C`$\Users\$TargetUserName\Win11Migrator"
+                if (-not (Test-Path $appListDir)) {
+                    New-Item -Path $appListDir -ItemType Directory -Force -ErrorAction Stop | Out-Null
+                }
+                $appData = $selectedApps | ForEach-Object {
+                    @{
+                        Name          = $_.Name
+                        InstallMethod = $_.InstallMethod
+                        PackageId     = $_.PackageId
+                        DownloadUrl   = $_.DownloadUrl
+                    }
+                }
+                $appJson = $appData | ConvertTo-Json -Depth 5
+                $appFile = Join-Path $appListDir 'PendingAppInstalls.json'
+                $appJson | Out-File -FilePath $appFile -Encoding UTF8 -Force
+                Write-MigrationLog -Message "App install list ($($selectedApps.Count) apps) written to target for deferred installation" -Level Info
+            } catch {
+                $errMsg = "Failed to write app install list to target: $($_.Exception.Message)"
+                $migrationResult.Errors += $errMsg
+                Write-MigrationLog -Message $errMsg -Level Warning
             }
         }
     }

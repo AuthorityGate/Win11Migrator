@@ -1053,5 +1053,564 @@
     "Registry": [
       "HKCU:\\Network"
     ]
+  },
+  {
+    "Name": "Steam",
+    "DisplayMatch": ["*Steam*"],
+    "Category": "Gaming",
+    "Files": [
+      "%PROGRAMFILES(X86)%\\Steam\\config\\",
+      "%PROGRAMFILES(X86)%\\Steam\\userdata\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Valve\\Steam"
+    ]
+  },
+  {
+    "Name": "Epic Games Launcher",
+    "DisplayMatch": ["*Epic Games*"],
+    "Category": "Gaming",
+    "Files": [
+      "%LOCALAPPDATA%\\EpicGamesLauncher\\Saved\\Config\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "GOG Galaxy",
+    "DisplayMatch": ["*GOG*"],
+    "Category": "Gaming",
+    "Files": [
+      "%LOCALAPPDATA%\\GOG.com\\Galaxy\\Configuration\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\GOG.com"
+    ]
+  },
+  {
+    "Name": "Ubisoft Connect",
+    "DisplayMatch": ["*Ubisoft*", "*Uplay*"],
+    "Category": "Gaming",
+    "Files": [
+      "%LOCALAPPDATA%\\Ubisoft Game Launcher\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Ubisoft"
+    ]
+  },
+  {
+    "Name": "EA Desktop",
+    "DisplayMatch": ["*EA Desktop*", "*EA App*", "*Origin*"],
+    "Category": "Gaming",
+    "Files": [
+      "%LOCALAPPDATA%\\Electronic Arts\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Electronic Arts"
+    ]
+  },
+  {
+    "Name": "Battle.net",
+    "DisplayMatch": ["*Battle.net*", "*Blizzard*"],
+    "Category": "Gaming",
+    "Files": [
+      "%APPDATA%\\Battle.net\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Obsidian",
+    "DisplayMatch": ["*Obsidian*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\obsidian\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Notion",
+    "DisplayMatch": ["*Notion*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Notion\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Todoist",
+    "DisplayMatch": ["*Todoist*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Todoist\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Joplin",
+    "DisplayMatch": ["*Joplin*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Joplin\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Logseq",
+    "DisplayMatch": ["*Logseq*"],
+    "Category": "Productivity",
+    "Files": [
+      "%USERPROFILE%\\.logseq\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Figma",
+    "DisplayMatch": ["*Figma*"],
+    "Category": "Creative",
+    "Files": [
+      "%APPDATA%\\Figma\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Davinci Resolve",
+    "DisplayMatch": ["*DaVinci*", "*Resolve*"],
+    "Category": "Creative",
+    "Files": [
+      "%APPDATA%\\Blackmagic Design\\DaVinci Resolve\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Kdenlive",
+    "DisplayMatch": ["*Kdenlive*"],
+    "Category": "Creative",
+    "Files": [
+      "%APPDATA%\\kdenlive\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Shotcut",
+    "DisplayMatch": ["*Shotcut*"],
+    "Category": "Creative",
+    "Files": [
+      "%APPDATA%\\Meltytech\\Shotcut\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "OBS Studio Profiles",
+    "DisplayMatch": ["*OBS*"],
+    "Category": "Creative",
+    "Files": [
+      "%APPDATA%\\obs-studio\\basic\\profiles\\",
+      "%APPDATA%\\obs-studio\\basic\\scenes\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Google Cloud SDK",
+    "DisplayMatch": ["*gcloud*", "*Google Cloud*"],
+    "Category": "Cloud",
+    "Files": [
+      "%APPDATA%\\gcloud\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Terraform",
+    "DisplayMatch": ["*Terraform*"],
+    "Category": "Development",
+    "Files": [
+      "%USERPROFILE%\\.terraform.d\\",
+      "%APPDATA%\\terraform.rc"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Kubernetes kubectl",
+    "DisplayMatch": ["*kubectl*", "*Kubernetes*"],
+    "Category": "Development",
+    "Files": [
+      "%USERPROFILE%\\.kube\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Helm",
+    "DisplayMatch": ["*helm*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\helm\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Gradle",
+    "DisplayMatch": ["*Gradle*"],
+    "Category": "Development",
+    "Files": [
+      "%USERPROFILE%\\.gradle\\gradle.properties",
+      "%USERPROFILE%\\.gradle\\init.d\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Maven",
+    "DisplayMatch": ["*Maven*"],
+    "Category": "Development",
+    "Files": [
+      "%USERPROFILE%\\.m2\\settings.xml",
+      "%USERPROFILE%\\.m2\\toolchains.xml"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Rust/Cargo",
+    "DisplayMatch": ["*Rust*", "*Cargo*"],
+    "Category": "Development",
+    "Files": [
+      "%USERPROFILE%\\.cargo\\config.toml"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Go Configuration",
+    "DisplayMatch": ["*Go*", "*GoLand*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\go\\env"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Yarn Configuration",
+    "DisplayMatch": ["*yarn*"],
+    "Category": "Development",
+    "Files": [
+      "%USERPROFILE%\\.yarnrc",
+      "%USERPROFILE%\\.yarnrc.yml"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "pnpm Configuration",
+    "DisplayMatch": ["*pnpm*"],
+    "Category": "Development",
+    "Files": [
+      "%LOCALAPPDATA%\\pnpm\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Neovim",
+    "DisplayMatch": ["*Neovim*", "*nvim*"],
+    "Category": "Development",
+    "Files": [
+      "%LOCALAPPDATA%\\nvim\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Vim",
+    "DisplayMatch": ["*vim*", "*gVim*"],
+    "Category": "Development",
+    "Files": [
+      "%USERPROFILE%\\_vimrc",
+      "%USERPROFILE%\\.vimrc",
+      "%USERPROFILE%\\vimfiles\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Windows Credential Manager",
+    "DisplayMatch": ["__always__"],
+    "Category": "System",
+    "Note": "Generic credentials only. DPAPI-encrypted credentials are machine-specific.",
+    "Files": [
+      "%LOCALAPPDATA%\\Microsoft\\Credentials\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "OneDrive Settings",
+    "DisplayMatch": ["*OneDrive*"],
+    "Category": "Cloud",
+    "Files": [
+      "%LOCALAPPDATA%\\Microsoft\\OneDrive\\settings\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Microsoft\\OneDrive"
+    ]
+  },
+  {
+    "Name": "Dropbox Settings",
+    "DisplayMatch": ["*Dropbox*"],
+    "Category": "Cloud",
+    "Files": [
+      "%APPDATA%\\Dropbox\\",
+      "%LOCALAPPDATA%\\Dropbox\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Google Drive Settings",
+    "DisplayMatch": ["*Google Drive*", "*Google Backup*", "*DriveFS*"],
+    "Category": "Cloud",
+    "Files": [
+      "%LOCALAPPDATA%\\Google\\DriveFS\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Box Drive",
+    "DisplayMatch": ["*Box*"],
+    "Category": "Cloud",
+    "Files": [
+      "%LOCALAPPDATA%\\Box\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Nextcloud",
+    "DisplayMatch": ["*Nextcloud*"],
+    "Category": "Cloud",
+    "Files": [
+      "%APPDATA%\\Nextcloud\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "NordVPN",
+    "DisplayMatch": ["*NordVPN*"],
+    "Category": "Network",
+    "Files": [
+      "%LOCALAPPDATA%\\NordVPN\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "OpenVPN",
+    "DisplayMatch": ["*OpenVPN*"],
+    "Category": "Network",
+    "Files": [
+      "%USERPROFILE%\\OpenVPN\\config\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "WireGuard",
+    "DisplayMatch": ["*WireGuard*"],
+    "Category": "Network",
+    "Files": [],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\WireGuard"
+    ]
+  },
+  {
+    "Name": "Tailscale",
+    "DisplayMatch": ["*Tailscale*"],
+    "Category": "Network",
+    "Files": [],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Tailscale IPN"
+    ]
+  },
+  {
+    "Name": "qBittorrent Settings",
+    "DisplayMatch": ["*qBittorrent*"],
+    "Category": "Utilities",
+    "Files": [
+      "%APPDATA%\\qBittorrent\\qBittorrent.ini",
+      "%LOCALAPPDATA%\\qBittorrent\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Windows Task Scheduler Custom Tasks",
+    "DisplayMatch": ["__always__"],
+    "Category": "System",
+    "Note": "User-created scheduled tasks only",
+    "Files": [],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\TaskManager"
+    ]
+  },
+  {
+    "Name": "Font Settings",
+    "DisplayMatch": ["__always__"],
+    "Category": "System",
+    "Note": "User-installed fonts",
+    "Files": [
+      "%LOCALAPPDATA%\\Microsoft\\Windows\\Fonts\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Fonts"
+    ]
+  },
+  {
+    "Name": "File Explorer Quick Access",
+    "DisplayMatch": ["__always__"],
+    "Category": "System",
+    "Files": [
+      "%APPDATA%\\Microsoft\\Windows\\Recent\\",
+      "%APPDATA%\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\",
+      "%APPDATA%\\Microsoft\\Windows\\Recent\\CustomDestinations\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Context Menu Customizations",
+    "DisplayMatch": ["__always__"],
+    "Category": "System",
+    "Files": [],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Classes\\*\\shell",
+      "HKCU:\\SOFTWARE\\Classes\\Directory\\shell"
+    ]
+  },
+  {
+    "Name": "Cursor IDE",
+    "DisplayMatch": ["*Cursor*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\Cursor\\User\\settings.json",
+      "%APPDATA%\\Cursor\\User\\keybindings.json",
+      "%APPDATA%\\Cursor\\User\\snippets\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Windsurf IDE",
+    "DisplayMatch": ["*Windsurf*"],
+    "Category": "Development",
+    "Files": [
+      "%APPDATA%\\Windsurf\\User\\settings.json",
+      "%APPDATA%\\Windsurf\\User\\keybindings.json"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "ScreenPresso",
+    "DisplayMatch": ["*Screenpresso*"],
+    "Category": "Productivity",
+    "Files": [
+      "%LOCALAPPDATA%\\Learnpulse\\Screenpresso\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Lightshot",
+    "DisplayMatch": ["*Lightshot*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Skillbrains\\lightshot\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "VeraCrypt",
+    "DisplayMatch": ["*VeraCrypt*"],
+    "Category": "Security",
+    "Files": [],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\VeraCrypt"
+    ]
+  },
+  {
+    "Name": "Spotify Preferences",
+    "DisplayMatch": ["*Spotify*"],
+    "Category": "Media",
+    "Files": [
+      "%APPDATA%\\Spotify\\prefs",
+      "%LOCALAPPDATA%\\Spotify\\Storage\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Plex Media Player",
+    "DisplayMatch": ["*Plex*"],
+    "Category": "Media",
+    "Files": [
+      "%LOCALAPPDATA%\\Plex Media Server\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "XMind",
+    "DisplayMatch": ["*XMind*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\XMind\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Zotero",
+    "DisplayMatch": ["*Zotero*"],
+    "Category": "Productivity",
+    "Files": [
+      "%APPDATA%\\Zotero\\Zotero\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Mendeley",
+    "DisplayMatch": ["*Mendeley*"],
+    "Category": "Productivity",
+    "Files": [
+      "%LOCALAPPDATA%\\Mendeley Ltd\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Rufus",
+    "DisplayMatch": ["*Rufus*"],
+    "Category": "Utilities",
+    "Files": [],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Rufus"
+    ]
+  },
+  {
+    "Name": "TreeSize",
+    "DisplayMatch": ["*TreeSize*"],
+    "Category": "Utilities",
+    "Files": [],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\JAM Software\\TreeSize"
+    ]
+  },
+  {
+    "Name": "Process Hacker",
+    "DisplayMatch": ["*Process Hacker*", "*SystemInformer*"],
+    "Category": "Utilities",
+    "Files": [
+      "%APPDATA%\\Process Hacker 2\\"
+    ],
+    "Registry": []
+  },
+  {
+    "Name": "Razer Synapse",
+    "DisplayMatch": ["*Razer*"],
+    "Category": "Utilities",
+    "Files": [
+      "%LOCALAPPDATA%\\Razer\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Razer"
+    ]
+  },
+  {
+    "Name": "Logitech Options",
+    "DisplayMatch": ["*Logitech*"],
+    "Category": "Utilities",
+    "Files": [
+      "%APPDATA%\\Logishrd\\",
+      "%LOCALAPPDATA%\\Logi\\LogiOptions\\"
+    ],
+    "Registry": [
+      "HKCU:\\SOFTWARE\\Logitech"
+    ]
   }
 ]

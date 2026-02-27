@@ -31,9 +31,9 @@
     "StoreId": "9MV0B5HZVK9Z",
     "PackageFamilyName": "Microsoft.GamingApp_8wekyb3d8bbwe"
   },
-  "your phone": {
-    "StoreId": "9NMPJ99VJBWV",
-    "PackageFamilyName": "Microsoft.YourPhone_8wekyb3d8bbwe"
+  "xbox game bar": {
+    "StoreId": "9NZKPSTSNW4P",
+    "PackageFamilyName": "Microsoft.XboxGamingOverlay_8wekyb3d8bbwe"
   },
   "phone link": {
     "StoreId": "9NMPJ99VJBWV",
@@ -114,5 +114,217 @@
   "powertoys": {
     "StoreId": "XP89DCGQ3K6VLD",
     "PackageFamilyName": "Microsoft.PowerToys_8wekyb3d8bbwe"
+  },
+  "sticky notes": {
+    "StoreId": "9NBLGGH4QGHW",
+    "PackageFamilyName": "Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe"
+  },
+  "windows clock": {
+    "StoreId": "9WZDNCRFJ3PR",
+    "PackageFamilyName": "Microsoft.WindowsAlarms_8wekyb3d8bbwe"
+  },
+  "windows calculator": {
+    "StoreId": "9WZDNCRFHVN5",
+    "PackageFamilyName": "Microsoft.WindowsCalculator_8wekyb3d8bbwe"
+  },
+  "windows camera": {
+    "StoreId": "9WZDNCRFJBBG",
+    "PackageFamilyName": "Microsoft.WindowsCamera_8wekyb3d8bbwe"
+  },
+  "windows maps": {
+    "StoreId": "9WZDNCRDTBVB",
+    "PackageFamilyName": "Microsoft.WindowsMaps_8wekyb3d8bbwe"
+  },
+  "windows photos": {
+    "StoreId": "9WZDNCRFJBH4",
+    "PackageFamilyName": "Microsoft.Windows.Photos_8wekyb3d8bbwe"
+  },
+  "windows notepad": {
+    "StoreId": "9MSMLRH6LZF3",
+    "PackageFamilyName": "Microsoft.WindowsNotepad_8wekyb3d8bbwe"
+  },
+  "windows media player": {
+    "StoreId": "9WZDNCRFJ3PT",
+    "PackageFamilyName": "Microsoft.ZuneMusic_8wekyb3d8bbwe"
+  },
+  "microsoft news": {
+    "StoreId": "9WZDNCRFHVFW",
+    "PackageFamilyName": "Microsoft.BingNews_8wekyb3d8bbwe"
+  },
+  "microsoft weather": {
+    "StoreId": "9WZDNCRFJ3Q2",
+    "PackageFamilyName": "Microsoft.BingWeather_8wekyb3d8bbwe"
+  },
+  "mail and calendar": {
+    "StoreId": "9WZDNCRFHVQM",
+    "PackageFamilyName": "microsoft.windowscommunicationsapps_8wekyb3d8bbwe"
+  },
+  "outlook": {
+    "StoreId": "9NRX63209R7B",
+    "PackageFamilyName": "Microsoft.OutlookForWindows_8wekyb3d8bbwe"
+  },
+  "microsoft journal": {
+    "StoreId": "9N318R854RHH",
+    "PackageFamilyName": "Microsoft.MicrosoftJournal_8wekyb3d8bbwe"
+  },
+  "quick assist": {
+    "StoreId": "9P7BP5VNWKX5",
+    "PackageFamilyName": "MicrosoftCorporationII.QuickAssist_8wekyb3d8bbwe"
+  },
+  "power automate desktop": {
+    "StoreId": "9NFTCH6J7FHV",
+    "PackageFamilyName": "Microsoft.PowerAutomateDesktop_8wekyb3d8bbwe"
+  },
+  "dev home": {
+    "StoreId": "9N8MHTPHNGVV",
+    "PackageFamilyName": "Microsoft.Windows.DevHome_8wekyb3d8bbwe"
+  },
+  "kindle": {
+    "StoreId": "9WZDNCRFJ4Q7",
+    "PackageFamilyName": "AMZN.AmazonKindle_stm5kn50g2gwa"
+  },
+  "amazon appstore": {
+    "StoreId": "9NJHK44TTKSX",
+    "PackageFamilyName": "Amazon.com.Amazon.AmazonAppstore_kc6t79cpj4tp0"
+  },
+  "icloud": {
+    "StoreId": "9PKTQ5699M62",
+    "PackageFamilyName": "AppleInc.iCloud_nzyj5cx40ttqa"
+  },
+  "apple devices": {
+    "StoreId": "9NP83LWLPZ9K",
+    "PackageFamilyName": "AppleInc.AppleDevices_nzyj5cx40ttqa"
+  },
+  "bitwarden": {
+    "StoreId": "9PJSDV0VPK04",
+    "PackageFamilyName": "8bitSolutionsLLC.bitwardendesktop_h4e712dmw3xyy"
+  },
+  "todoist": {
+    "StoreId": "9NBLGGH73CQ6",
+    "PackageFamilyName": "Doist.Todoist_mxrdr3j73r538"
+  },
+  "grammarly": {
+    "StoreId": "9P25B5HZJQJM",
+    "PackageFamilyName": "Grammarly.GrammarlyforWindows_bfg6d8r5r18c2"
+  },
+  "instagram": {
+    "StoreId": "9NBLGGH5L9XT",
+    "PackageFamilyName": "Facebook.InstagramBeta_8xx8rvfyw5nnt"
+  },
+  "x": {
+    "StoreId": "9WZDNCRFJ140",
+    "PackageFamilyName": "9E2F88E3.Twitter_wgeqdkkx372wm"
+  },
+  "pinterest": {
+    "StoreId": "9WZDNCRFJ3G2",
+    "PackageFamilyName": "Pinterest.Pinterest_8ky4k1sbbbrfe"
+  },
+  "slack": {
+    "StoreId": "9WZDNCRDK3WP",
+    "PackageFamilyName": "91750D7E.Slack_8xx8rvfyw5nnt"
+  },
+  "zoom": {
+    "StoreId": "XP99J3KP4XZ4VV",
+    "PackageFamilyName": "Zoom.Zoom_vfbcz8116hpga"
+  },
+  "microsoft teams": {
+    "StoreId": "XP8BT8DW290MPQ",
+    "PackageFamilyName": "MSTeams_8wekyb3d8bbwe"
+  },
+  "signal": {
+    "StoreId": "9N5HKQZ2FR8M",
+    "PackageFamilyName": "SignalPrivateMessenger.Signal_13knf35xpg0ja"
+  },
+  "discord": {
+    "StoreId": "XPDC2RH70K22MN",
+    "PackageFamilyName": "Discord.Discord_h35qw0n5aqp22"
+  },
+  "line": {
+    "StoreId": "9WZDNCRFJ2G6",
+    "PackageFamilyName": "NAVER.LINEwin8_8ptj1n1ap83r8"
+  },
+  "viber": {
+    "StoreId": "9WZDNCRFJ4RP",
+    "PackageFamilyName": "Viber.Viber_8aetk5dpcs8s8"
+  },
+  "paramount+": {
+    "StoreId": "9WZDNCRFJ0WK",
+    "PackageFamilyName": "ViacomCBS.ParamountPlus_wze1e8e4exe7e"
+  },
+  "peacock tv": {
+    "StoreId": "9PP0M2HK6P8Q",
+    "PackageFamilyName": "PeacockTV.PeacockTV_wze1e8e4exe7e"
+  },
+  "hulu": {
+    "StoreId": "9WZDNCRFJ3L1",
+    "PackageFamilyName": "HuluLLC.HuluPlus_fphbd361v8tya"
+  },
+  "crunchyroll": {
+    "StoreId": "9WZDNCRDX1S2",
+    "PackageFamilyName": "Ellation.Crunchyroll_a95e6keqrfgep"
+  },
+  "plex": {
+    "StoreId": "9NBLGGH4V8WX",
+    "PackageFamilyName": "CAF9E577.Plex_aam28m9k2xhag"
+  },
+  "deezer": {
+    "StoreId": "9NBLGGH6J7VV",
+    "PackageFamilyName": "Deezer.Deezer_q7m17pa7q8kj0"
+  },
+  "amazon music": {
+    "StoreId": "9NDKWLP03GNP",
+    "PackageFamilyName": "AmazonMobileLLC.AmazonMusic_kc6t79cpj4tp0"
+  },
+  "shazam": {
+    "StoreId": "9WZDNCRFJ0QP",
+    "PackageFamilyName": "ShazamEntertainmentLtd.Shazam_p3s0yz2stfeng"
+  },
+  "tunein radio": {
+    "StoreId": "9WZDNCRFJ1Q5",
+    "PackageFamilyName": "TuneIn.TuneInRadio_gfd48af05jnrw"
+  },
+  "adobe express": {
+    "StoreId": "9NTDXLBZ8VCR",
+    "PackageFamilyName": "AdobeInc.AdobeExpress_ynb6jyjzte8ga"
+  },
+  "lightroom": {
+    "StoreId": "XPDP273C0XHQH2",
+    "PackageFamilyName": "AdobeInc.AdobePhotoshopLightroom_ynb6jyjzte8ga"
+  },
+  "figma": {
+    "StoreId": "9NZQZ7PM3PQ8",
+    "PackageFamilyName": "Figma.FigmaDesign_stm5kn50g2gwa"
+  },
+  "paint 3d": {
+    "StoreId": "9NBLGGH5FV99",
+    "PackageFamilyName": "Microsoft.MSPaint_8wekyb3d8bbwe"
+  },
+  "3d viewer": {
+    "StoreId": "9NBLGGH42THS",
+    "PackageFamilyName": "Microsoft.Microsoft3DViewer_8wekyb3d8bbwe"
+  },
+  "voice recorder": {
+    "StoreId": "9WZDNCRFHWKN",
+    "PackageFamilyName": "Microsoft.WindowsSoundRecorder_8wekyb3d8bbwe"
+  },
+  "feedback hub": {
+    "StoreId": "9NBLGGH4R32N",
+    "PackageFamilyName": "Microsoft.WindowsFeedbackHub_8wekyb3d8bbwe"
+  },
+  "microsoft tips": {
+    "StoreId": "9WZDNCRDTBJJ",
+    "PackageFamilyName": "Microsoft.Getstarted_8wekyb3d8bbwe"
+  },
+  "copilot": {
+    "StoreId": "9NHT9RB2F4HD",
+    "PackageFamilyName": "Microsoft.Copilot_8wekyb3d8bbwe"
+  },
+  "wsl": {
+    "StoreId": "9P9TQF7MRM4R",
+    "PackageFamilyName": "MicrosoftCorporationII.WindowsSubsystemForLinux_8wekyb3d8bbwe"
+  },
+  "app installer": {
+    "StoreId": "9NBLGGH4NNS1",
+    "PackageFamilyName": "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe"
   }
 }

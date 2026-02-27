@@ -9,6 +9,12 @@
     "SilentArgs": "/sAll /rs /msi EULA_ACCEPT=YES",
     "InstallerType": "exe"
   },
+  "adobe creative cloud": {
+    "Url": "https://creativecloud.adobe.com/apps/download/creative-cloud",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Adobe account. Install via Creative Cloud desktop app."
+  },
   "autodesk autocad": {
     "Url": "https://www.autodesk.com/products/autocad/free-trial",
     "SilentArgs": "",
@@ -21,6 +27,18 @@
     "InstallerType": "manual",
     "Notes": "Requires Autodesk account. Download from Autodesk website."
   },
+  "autodesk revit": {
+    "Url": "https://www.autodesk.com/products/revit/free-trial",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Autodesk account."
+  },
+  "autodesk fusion": {
+    "Url": "https://www.autodesk.com/products/fusion-360/personal",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Autodesk account."
+  },
   "beyond compare": {
     "Url": "https://www.scootersoftware.com/download",
     "SilentArgs": "/VERYSILENT /NORESTART",
@@ -30,6 +48,12 @@
     "Url": "https://www.techsmith.com/camtasia-download.html",
     "SilentArgs": "/S",
     "InstallerType": "exe"
+  },
+  "cisco anyconnect": {
+    "Url": "https://software.cisco.com/download/home/286281283/type/282364313",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Cisco account. Deploy via IT admin."
   },
   "cisco webex": {
     "Url": "https://www.webex.com/downloads.html",
@@ -45,7 +69,17 @@
     "Url": "https://www.coreldraw.com/en/free-trials/",
     "SilentArgs": "",
     "InstallerType": "manual",
-    "Notes": "Requires Corel account. Download from Corel website."
+    "Notes": "Requires Corel account."
+  },
+  "cursor": {
+    "Url": "https://www.cursor.com/download",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "cyberduck": {
+    "Url": "https://cyberduck.io/download/",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "msi"
   },
   "davinci resolve": {
     "Url": "https://www.blackmagicdesign.com/products/davinciresolve",
@@ -53,73 +87,81 @@
     "InstallerType": "manual",
     "Notes": "Requires registration on Blackmagic Design website."
   },
+  "dbeaver": {
+    "Url": "https://dbeaver.io/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "docker desktop": {
+    "Url": "https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe",
+    "SilentArgs": "install --quiet --accept-license",
+    "InstallerType": "exe"
+  },
+  "drawio": {
+    "Url": "https://github.com/jgraph/drawio-desktop/releases",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "elgato stream deck": {
+    "Url": "https://www.elgato.com/downloads",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "epic games launcher": {
+    "Url": "https://store.epicgames.com/en-US/download",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "figma": {
+    "Url": "https://www.figma.com/download/desktop/win",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "filezilla": {
+    "Url": "https://filezilla-project.org/download.php?type=client",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "forticlient vpn": {
+    "Url": "https://www.fortinet.com/support/product-downloads",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Fortinet account or IT deployment."
+  },
+  "gimp": {
+    "Url": "https://www.gimp.org/downloads/",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "github desktop": {
+    "Url": "https://central.github.com/deployments/desktop/desktop/latest/win32",
+    "SilentArgs": "",
+    "InstallerType": "exe",
+    "Notes": "Squirrel installer - auto-installs silently."
+  },
+  "globalprotect": {
+    "Url": "https://www.paloaltonetworks.com/products/globalprotect",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Palo Alto account or IT deployment."
+  },
+  "gog galaxy": {
+    "Url": "https://www.gog.com/galaxy",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
   "grammarly": {
     "Url": "https://www.grammarly.com/desktop/windows",
     "SilentArgs": "/S",
     "InstallerType": "exe"
   },
-  "logitech options": {
-    "Url": "https://download01.logi.com/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer.exe",
+  "handbrake": {
+    "Url": "https://handbrake.fr/downloads.php",
     "SilentArgs": "/S",
     "InstallerType": "exe"
   },
-  "microsoft office": {
-    "Url": "https://www.office.com/",
-    "SilentArgs": "",
-    "InstallerType": "manual",
-    "Notes": "Requires Microsoft 365 subscription. Install via office.com or IT deployment."
-  },
-  "microsoft 365": {
-    "Url": "https://www.office.com/",
-    "SilentArgs": "",
-    "InstallerType": "manual",
-    "Notes": "Requires Microsoft 365 subscription. Install via office.com or IT deployment."
-  },
-  "obs studio": {
-    "Url": "https://obsproject.com/download",
-    "SilentArgs": "/S",
-    "InstallerType": "exe"
-  },
-  "quickbooks": {
-    "Url": "https://quickbooks.intuit.com/desktop/",
-    "SilentArgs": "",
-    "InstallerType": "manual",
-    "Notes": "Requires Intuit account. Download from QuickBooks website."
-  },
-  "rhinoceros": {
-    "Url": "https://www.rhino3d.com/download/",
-    "SilentArgs": "",
-    "InstallerType": "manual",
-    "Notes": "Requires license. Download from Rhino3D website."
-  },
-  "snagit": {
-    "Url": "https://www.techsmith.com/snagit-download.html",
-    "SilentArgs": "/S",
-    "InstallerType": "exe"
-  },
-  "solidworks": {
-    "Url": "https://www.solidworks.com/sw/support/downloads.htm",
-    "SilentArgs": "",
-    "InstallerType": "manual",
-    "Notes": "Requires SOLIDWORKS account and license."
-  },
-  "tableau": {
-    "Url": "https://www.tableau.com/products/desktop/download",
-    "SilentArgs": "/quiet /norestart",
-    "InstallerType": "exe"
-  },
-  "vmware workstation": {
-    "Url": "https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion",
-    "SilentArgs": "/s /v\"/qn EULAS_AGREED=1 AUTOSOFTWAREUPDATE=0\"",
-    "InstallerType": "exe"
-  },
-  "wireshark": {
-    "Url": "https://www.wireshark.org/download.html",
-    "SilentArgs": "/S /desktopicon=yes",
-    "InstallerType": "exe"
-  },
-  "webstorm": {
-    "Url": "https://www.jetbrains.com/webstorm/download/",
+  "insomnia": {
+    "Url": "https://insomnia.rest/download",
     "SilentArgs": "/S",
     "InstallerType": "exe"
   },
@@ -128,19 +170,139 @@
     "SilentArgs": "/S",
     "InstallerType": "exe"
   },
-  "pycharm": {
-    "Url": "https://www.jetbrains.com/pycharm/download/",
+  "iterm2": {
+    "Url": "https://aka.ms/terminal",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Use Microsoft Store or winget: winget install Microsoft.WindowsTerminal"
+  },
+  "jetbrains toolbox": {
+    "Url": "https://www.jetbrains.com/toolbox-app/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe",
+    "Notes": "JetBrains Toolbox manages all JetBrains IDE installations."
+  },
+  "kdenlive": {
+    "Url": "https://kdenlive.org/en/download/",
     "SilentArgs": "/S",
     "InstallerType": "exe"
   },
-  "datagrip": {
-    "Url": "https://www.jetbrains.com/datagrip/download/",
+  "keepass": {
+    "Url": "https://keepass.info/download.html",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "keepassxc": {
+    "Url": "https://keepassxc.org/download/#windows",
     "SilentArgs": "/S",
     "InstallerType": "exe"
   },
-  "rider": {
-    "Url": "https://www.jetbrains.com/rider/download/",
+  "krita": {
+    "Url": "https://krita.org/en/download/",
     "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "libreoffice": {
+    "Url": "https://www.libreoffice.org/download/download-libreoffice/",
+    "SilentArgs": "/qn",
+    "InstallerType": "msi"
+  },
+  "logitech options": {
+    "Url": "https://download01.logi.com/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer.exe",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "logitech g hub": {
+    "Url": "https://www.logitechg.com/en-us/innovation/g-hub.html",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "loom": {
+    "Url": "https://www.loom.com/download",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "malwarebytes": {
+    "Url": "https://www.malwarebytes.com/mwb-download",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "microsoft 365": {
+    "Url": "https://www.office.com/",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Microsoft 365 subscription. Install via office.com or IT deployment."
+  },
+  "microsoft office": {
+    "Url": "https://www.office.com/",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Microsoft 365 subscription. Install via office.com or IT deployment."
+  },
+  "miro": {
+    "Url": "https://miro.com/apps/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "mobaxterm": {
+    "Url": "https://mobaxterm.mobatek.net/download.html",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "mongodb compass": {
+    "Url": "https://www.mongodb.com/try/download/compass",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "msi"
+  },
+  "mremoteng": {
+    "Url": "https://mremoteng.org/download",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "msi"
+  },
+  "notion": {
+    "Url": "https://www.notion.so/desktop",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "obs studio": {
+    "Url": "https://obsproject.com/download",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "obsidian": {
+    "Url": "https://obsidian.md/download",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "okta verify": {
+    "Url": "https://help.okta.com/en-us/content/topics/end-user/ov-win-install.htm",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Deploy via IT admin or Microsoft Store."
+  },
+  "onlyoffice": {
+    "Url": "https://www.onlyoffice.com/download-desktop.aspx",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "opera": {
+    "Url": "https://www.opera.com/download",
+    "SilentArgs": "/silent /launchopera 0",
+    "InstallerType": "exe"
+  },
+  "opera gx": {
+    "Url": "https://www.opera.com/gx",
+    "SilentArgs": "/silent /launchopera 0",
+    "InstallerType": "exe"
+  },
+  "paint.net": {
+    "Url": "https://www.getpaint.net/download.html",
+    "SilentArgs": "/auto",
+    "InstallerType": "exe"
+  },
+  "pgadmin": {
+    "Url": "https://www.pgadmin.org/download/pgadmin-4-windows/",
+    "SilentArgs": "/VERYSILENT /NORESTART",
     "InstallerType": "exe"
   },
   "postman": {
@@ -153,9 +315,31 @@
     "SilentArgs": "-quiet -norestart ACCEPT_EULA=1",
     "InstallerType": "msi"
   },
-  "pgadmin": {
-    "Url": "https://www.pgadmin.org/download/pgadmin-4-windows/",
-    "SilentArgs": "/VERYSILENT /NORESTART",
+  "pycharm": {
+    "Url": "https://www.jetbrains.com/pycharm/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "quickbooks": {
+    "Url": "https://quickbooks.intuit.com/desktop/",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Intuit account. Download from QuickBooks website."
+  },
+  "razer synapse": {
+    "Url": "https://www.razer.com/synapse-3",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "rhinoceros": {
+    "Url": "https://www.rhino3d.com/download/",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires license. Download from Rhino3D website."
+  },
+  "rider": {
+    "Url": "https://www.jetbrains.com/rider/download/",
+    "SilentArgs": "/S",
     "InstallerType": "exe"
   },
   "robo 3t": {
@@ -163,8 +347,337 @@
     "SilentArgs": "/S",
     "InstallerType": "exe"
   },
-  "mongodb compass": {
-    "Url": "https://www.mongodb.com/try/download/compass",
+  "royal ts": {
+    "Url": "https://royalapps.com/ts/win/download",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "msi"
+  },
+  "rstudio": {
+    "Url": "https://posit.co/download/rstudio-desktop/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "sap gui": {
+    "Url": "https://support.sap.com/en/my-support/software-downloads.html",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires SAP account. Deploy via IT."
+  },
+  "screenpresso": {
+    "Url": "https://www.screenpresso.com/download",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "securecrt": {
+    "Url": "https://www.vandyke.com/cgi-bin/releases.php?product=securecrt",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "sharex": {
+    "Url": "https://getsharex.com/downloads",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "shotcut": {
+    "Url": "https://shotcut.org/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "signal": {
+    "Url": "https://signal.org/download/windows",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "sketchup": {
+    "Url": "https://www.sketchup.com/try-sketchup",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires Trimble account."
+  },
+  "slack": {
+    "Url": "https://slack.com/downloads/windows",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "snagit": {
+    "Url": "https://www.techsmith.com/snagit-download.html",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "solidworks": {
+    "Url": "https://www.solidworks.com/sw/support/downloads.htm",
+    "SilentArgs": "",
+    "InstallerType": "manual",
+    "Notes": "Requires SOLIDWORKS account and license."
+  },
+  "sourcetree": {
+    "Url": "https://www.sourcetreeapp.com/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "steam": {
+    "Url": "https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "sublime text": {
+    "Url": "https://www.sublimetext.com/download",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "tableau": {
+    "Url": "https://www.tableau.com/products/desktop/download",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "exe"
+  },
+  "tailscale": {
+    "Url": "https://tailscale.com/download/windows",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "teamviewer": {
+    "Url": "https://www.teamviewer.com/en/download/windows/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "telegram": {
+    "Url": "https://desktop.telegram.org/",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "total commander": {
+    "Url": "https://www.ghisler.com/download.htm",
+    "SilentArgs": "/A",
+    "InstallerType": "exe"
+  },
+  "typora": {
+    "Url": "https://typora.io/#download",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "ubisoft connect": {
+    "Url": "https://ubisoftconnect.com/en-US/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "veracrypt": {
+    "Url": "https://veracrypt.fr/en/Downloads.html",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "vivaldi": {
+    "Url": "https://vivaldi.com/download/",
+    "SilentArgs": "--vivaldi-silent --vivaldi-install-dir",
+    "InstallerType": "exe"
+  },
+  "vmware workstation": {
+    "Url": "https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion",
+    "SilentArgs": "/s /v\"/qn EULAS_AGREED=1 AUTOSOFTWAREUPDATE=0\"",
+    "InstallerType": "exe"
+  },
+  "webstorm": {
+    "Url": "https://www.jetbrains.com/webstorm/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "whatsapp": {
+    "Url": "https://www.whatsapp.com/download",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "winmerge": {
+    "Url": "https://winmerge.org/downloads/",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "winscp": {
+    "Url": "https://winscp.net/eng/download.php",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "wireshark": {
+    "Url": "https://www.wireshark.org/download.html",
+    "SilentArgs": "/S /desktopicon=yes",
+    "InstallerType": "exe"
+  },
+  "xmind": {
+    "Url": "https://xmind.app/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "zotero": {
+    "Url": "https://www.zotero.org/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "zoom": {
+    "Url": "https://zoom.us/client/latest/ZoomInstallerFull.msi",
+    "SilentArgs": "/quiet /norestart ZoomAutoUpdate=true",
+    "InstallerType": "msi"
+  },
+  "zoom workplace": {
+    "Url": "https://zoom.us/client/latest/ZoomInstallerFull.msi",
+    "SilentArgs": "/quiet /norestart ZoomAutoUpdate=true",
+    "InstallerType": "msi"
+  },
+  "datagrip": {
+    "Url": "https://www.jetbrains.com/datagrip/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "clion": {
+    "Url": "https://www.jetbrains.com/clion/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "goland": {
+    "Url": "https://www.jetbrains.com/go/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "rubymine": {
+    "Url": "https://www.jetbrains.com/ruby/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "phpstorm": {
+    "Url": "https://www.jetbrains.com/phpstorm/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "android studio": {
+    "Url": "https://developer.android.com/studio",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "anydesk": {
+    "Url": "https://anydesk.com/en/downloads/windows",
+    "SilentArgs": "--install --silent",
+    "InstallerType": "exe"
+  },
+  "blender": {
+    "Url": "https://www.blender.org/download/",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "msi"
+  },
+  "discord": {
+    "Url": "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x64",
+    "SilentArgs": "",
+    "InstallerType": "exe",
+    "Notes": "Squirrel installer - auto-installs silently."
+  },
+  "dropbox": {
+    "Url": "https://www.dropbox.com/downloading?type=full",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "google drive": {
+    "Url": "https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe",
+    "SilentArgs": "--silent --gsuite_shortcuts=false",
+    "InstallerType": "exe"
+  },
+  "inkscape": {
+    "Url": "https://inkscape.org/release/",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "msi"
+  },
+  "musescore": {
+    "Url": "https://musescore.org/en/download",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "msi"
+  },
+  "nextcloud": {
+    "Url": "https://nextcloud.com/install/#install-clients",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "nordvpn": {
+    "Url": "https://nordvpn.com/download/app/?platform=windows",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "pcloud": {
+    "Url": "https://www.pcloud.com/download-free-online-cloud-file-storage.html",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "putty": {
+    "Url": "https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "msi"
+  },
+  "spotify": {
+    "Url": "https://download.scdn.co/SpotifyFullSetup.exe",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "thunderbird": {
+    "Url": "https://www.thunderbird.net/en-US/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "vlc": {
+    "Url": "https://www.videolan.org/vlc/download-windows.html",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "bitwarden": {
+    "Url": "https://bitwarden.com/download/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "calibre": {
+    "Url": "https://calibre-ebook.com/download_windows64",
+    "SilentArgs": "/quiet /norestart",
+    "InstallerType": "msi"
+  },
+  "evernote": {
+    "Url": "https://evernote.com/download",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "git": {
+    "Url": "https://git-scm.com/download/win",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "irfanview": {
+    "Url": "https://www.irfanview.com/main_download_engl.htm",
+    "SilentArgs": "/silent",
+    "InstallerType": "exe"
+  },
+  "notepad++": {
+    "Url": "https://notepad-plus-plus.org/downloads/",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "qbittorrent": {
+    "Url": "https://www.qbittorrent.org/download",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "7-zip": {
+    "Url": "https://www.7-zip.org/download.html",
+    "SilentArgs": "/S",
+    "InstallerType": "exe"
+  },
+  "audacity": {
+    "Url": "https://www.audacityteam.org/download/",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "greenshot": {
+    "Url": "https://getgreenshot.org/downloads/",
+    "SilentArgs": "/VERYSILENT /NORESTART",
+    "InstallerType": "exe"
+  },
+  "sumatrapdf": {
+    "Url": "https://www.sumatrapdfreader.org/download-free-pdf-viewer",
+    "SilentArgs": "-s -install",
+    "InstallerType": "exe"
+  },
+  "foxit reader": {
+    "Url": "https://www.foxit.com/pdf-reader/",
     "SilentArgs": "/quiet /norestart",
     "InstallerType": "msi"
   }
