@@ -1,5 +1,4 @@
 {
-  "_comment": "Microsoft Store app catalog mapping normalized app names to StoreId and PackageFamilyName. 300+ entries. Keys starting with _ are metadata.",
   "netflix": {
     "StoreId": "9WZDNCRFJ3TH",
     "PackageFamilyName": "4DF9E0F8.Netflix_mcm4njqhnhss8"
@@ -808,7 +807,6 @@
     "StoreId": "9V8QZTLFN60K",
     "PackageFamilyName": "AdobeInc.AdobeXD_ynb6jyjzte8ga"
   },
-  "_comment_new_entries": "--- New entries added below (200+ additional apps) ---",
   "python": {
     "StoreId": "9NCVDN91XZQP",
     "PackageFamilyName": "PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0"
@@ -1300,14 +1298,6 @@
   "mixed reality portal": {
     "StoreId": "9NG1H8B3ZC7M",
     "PackageFamilyName": "Microsoft.MixedReality.Portal_8wekyb3d8bbwe"
-  },
-  "mail": {
-    "StoreId": "9WZDNCRFHVQM",
-    "PackageFamilyName": "microsoft.windowscommunicationsapps_8wekyb3d8bbwe"
-  },
-  "calendar": {
-    "StoreId": "9WZDNCRFHVQM",
-    "PackageFamilyName": "microsoft.windowscommunicationsapps_8wekyb3d8bbwe"
   },
   "threema": {
     "StoreId": "9NBLGGH5LCH2",
