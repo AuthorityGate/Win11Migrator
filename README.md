@@ -36,6 +36,8 @@ Win11Migrator scans a source machine for installed applications, user data, brow
 | **Privileges** | Administrator recommended. Required on the target machine for app installation. |
 | **Disk Space** | Enough free space on the transfer medium to hold the migration package |
 
+Win11Migrator checks the official AuthorityGate release channel at startup, no more than once every 24 hours. When a newer version is available, it downloads the installer and requires a valid, timestamped **AUTHORITYGATE INC** Authenticode signature before offering to launch it. Run `Win11Migrator.ps1 -CheckForUpdates` for an immediate manual check.
+
 Optional tools that enhance functionality (detected automatically at runtime):
 
 | Tool | Purpose |

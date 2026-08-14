@@ -30,11 +30,13 @@
 
 [CmdletBinding()]
 param(
-    [string]$OutputPath = (Join-Path $PSScriptRoot "Build"),
-    [string]$Version
+    [string]$OutputPath,
+    [string]$Version,
+    [string]$CertificateThumbprint = '787D83F3BFFD136E8D2F8AD3261FD15D393FAC7A'
 )
 
 $ErrorActionPreference = 'Stop'
+if (-not $OutputPath) { $OutputPath = Join-Path $PSScriptRoot 'Build' }
 
 # ── Read version from config if not specified ──
 if (-not $Version) {
@@ -58,7 +60,7 @@ New-Item -Path $OutputPath -ItemType Directory -Force | Out-Null
 # ══════════════════════════════════════════════════════════════════════════════
 # STEP 1: Stage distributable files
 # ══════════════════════════════════════════════════════════════════════════════
-Write-Host "[1/5] Staging files..." -ForegroundColor Yellow
+Write-Host "[1/6] Staging files..." -ForegroundColor Yellow
 
 $includeItems = @(
     'Win11Migrator.ps1',
@@ -114,7 +116,7 @@ Write-Host "  Staged $fileCount files ($totalSizeMB MB)" -ForegroundColor Gray
 # ══════════════════════════════════════════════════════════════════════════════
 # STEP 2: Compress to ZIP
 # ══════════════════════════════════════════════════════════════════════════════
-Write-Host "[2/5] Compressing to ZIP..." -ForegroundColor Yellow
+Write-Host "[2/6] Compressing to ZIP..." -ForegroundColor Yellow
 
 $zipPath = Join-Path $OutputPath "_payload.zip"
 Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -126,7 +128,7 @@ Write-Host "  ZIP payload: $zipSize MB" -ForegroundColor Gray
 # ══════════════════════════════════════════════════════════════════════════════
 # STEP 3: Convert ZIP to Base64 and generate installer PS1
 # ══════════════════════════════════════════════════════════════════════════════
-Write-Host "[3/5] Generating installer script..." -ForegroundColor Yellow
+Write-Host "[3/6] Generating installer script..." -ForegroundColor Yellow
 
 $zipBytes = [System.IO.File]::ReadAllBytes($zipPath)
 $base64Payload = [Convert]::ToBase64String($zipBytes)
@@ -293,7 +295,7 @@ Write-Host "  Installer script: $ps1Size MB" -ForegroundColor Gray
 # ══════════════════════════════════════════════════════════════════════════════
 # STEP 4: Compile C# EXE stub
 # ══════════════════════════════════════════════════════════════════════════════
-Write-Host "[4/5] Compiling EXE stub..." -ForegroundColor Yellow
+Write-Host "[4/6] Compiling EXE stub..." -ForegroundColor Yellow
 
 # Strategy: The EXE embeds the installer PS1 as Base64 (safe for C# string literals —
 # only [A-Za-z0-9+/=] characters). At runtime it decodes to the PS1 text, writes to
@@ -395,7 +397,7 @@ if (-not $cscPath -or -not (Test-Path $cscPath)) {
 
 Write-Host "  Compiler: $cscPath" -ForegroundColor DarkGray
 
-$exeName = "Win11Migrator_Setup.exe"
+$exeName = "Win11Migrator-Setup-$Version-x64.exe"
 $exePath = Join-Path $OutputPath $exeName
 
 # Compile
@@ -418,9 +420,29 @@ $exeSize = [math]::Round((Get-Item $exePath).Length / 1MB, 2)
 Write-Host "  Compiled: $exeName ($exeSize MB)" -ForegroundColor Gray
 
 # ══════════════════════════════════════════════════════════════════════════════
-# STEP 5: Cleanup intermediate files
+# STEP 5: Sign and timestamp
 # ══════════════════════════════════════════════════════════════════════════════
-Write-Host "[5/5] Cleaning up..." -ForegroundColor Yellow
+Write-Host "[5/6] Signing installer..." -ForegroundColor Yellow
+$certificate = Get-Item "Cert:\CurrentUser\My\$CertificateThumbprint" -ErrorAction Stop
+if ($certificate.Subject -notmatch 'CN=AUTHORITYGATE INC') {
+    throw "Certificate $CertificateThumbprint is not the AUTHORITYGATE INC signing certificate."
+}
+$signTool = Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin\*\x64\signtool.exe" -ErrorAction SilentlyContinue |
+    Sort-Object FullName -Descending | Select-Object -First 1 -ExpandProperty FullName
+if (-not $signTool) { throw 'Windows SignTool was not found.' }
+& $signTool sign /sha1 $CertificateThumbprint /fd SHA256 `
+    /tr 'http://timestamp.globalsign.com/tsa/r6advanced1' /td SHA256 $exePath
+if ($LASTEXITCODE -ne 0) { throw "SignTool failed with exit code $LASTEXITCODE." }
+$signed = Get-AuthenticodeSignature -FilePath $exePath
+if ($signed.Status -ne 'Valid' -or $signed.SignerCertificate.Subject -notmatch 'CN=AUTHORITYGATE INC') {
+    throw "Authenticode verification failed: $($signed.StatusMessage)"
+}
+Write-Host "  Signed and timestamped by AUTHORITYGATE INC" -ForegroundColor Green
+
+# ══════════════════════════════════════════════════════════════════════════════
+# STEP 6: Cleanup intermediate files
+# ══════════════════════════════════════════════════════════════════════════════
+Write-Host "[6/6] Cleaning up..." -ForegroundColor Yellow
 
 Remove-Item $stagingDir -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item $zipPath -Force -ErrorAction SilentlyContinue

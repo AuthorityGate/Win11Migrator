@@ -67,12 +67,20 @@ param(
     [string]$NetworkTarget,
     [string]$TargetUser,
     [PSCredential]$TargetCredential,
-    [string]$ComparePath
+    [string]$ComparePath,
+    [switch]$CheckForUpdates
 )
 
 $ErrorActionPreference = 'Stop'
 $script:MigratorRoot = $PSScriptRoot
-$script:MigratorVersion = '1.0.0'
+$script:MigratorVersion = '1.0.1'
+
+. "$script:MigratorRoot\Core\Invoke-SelfUpdate.ps1"
+if ($CheckForUpdates) {
+    Add-Type -AssemblyName PresentationFramework
+    Invoke-Win11MigratorSelfUpdate -CurrentVersion ([version]$script:MigratorVersion)
+    exit 0
+}
 
 # --- Load Core modules ---
 . "$script:MigratorRoot\Core\Initialize-Environment.ps1"
@@ -1176,6 +1184,12 @@ if ($CLI) {
     }
 } else {
     # Load and launch WPF GUI
+    try {
+        Add-Type -AssemblyName PresentationFramework
+        Invoke-Win11MigratorSelfUpdate -CurrentVersion ([version]$script:MigratorVersion) -Automatic
+    } catch {
+        Write-MigrationLog -Message "Update check failed: $($_.Exception.Message)" -Level Warning
+    }
     . "$script:MigratorRoot\GUI\MainWindow.ps1"
     Show-MainWindow -Config $script:Config -MigratorRoot $script:MigratorRoot
 }
