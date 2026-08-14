@@ -374,8 +374,9 @@ namespace Win11Migrator
 }
 "@
 
-$csPath = Join-Path $OutputPath "_installer.cs"
-[System.IO.File]::WriteAllText($csPath, $csharpSource, [System.Text.Encoding]::UTF8)
+$generatedCsPath = Join-Path $OutputPath "_installer.cs"
+[System.IO.File]::WriteAllText($generatedCsPath, $csharpSource, [System.Text.Encoding]::UTF8)
+$csPath = Join-Path $PSScriptRoot 'Installer\SetupWizard.cs'
 
 # Find csc.exe from the .NET Framework
 $cscPath = $null
@@ -406,6 +407,9 @@ $compileArgs = @(
     '/target:winexe',
     '/platform:anycpu',
     '/optimize+',
+    '/reference:System.Windows.Forms.dll',
+    '/reference:System.Drawing.dll',
+    "/resource:$installerPs1Path,InstallerScript",
     "/out:$exePath",
     $csPath
 )
@@ -447,7 +451,7 @@ Write-Host "[6/6] Cleaning up..." -ForegroundColor Yellow
 Remove-Item $stagingDir -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item $zipPath -Force -ErrorAction SilentlyContinue
 Remove-Item $installerPs1Path -Force -ErrorAction SilentlyContinue
-Remove-Item $csPath -Force -ErrorAction SilentlyContinue
+Remove-Item $generatedCsPath -Force -ErrorAction SilentlyContinue
 
 # ══════════════════════════════════════════════════════════════════════════════
 # Summary

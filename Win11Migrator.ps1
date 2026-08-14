@@ -73,7 +73,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $script:MigratorRoot = $PSScriptRoot
-$script:MigratorVersion = '1.0.1'
+$script:MigratorVersion = '1.0.2'
 
 . "$script:MigratorRoot\Core\Invoke-SelfUpdate.ps1"
 if ($CheckForUpdates) {
