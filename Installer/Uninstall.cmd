@@ -1,14 +1,14 @@
 @echo off
 :: ========================================================================
 :: Win11Migrator Uninstaller
-:: Removes application files, shortcuts, Defender exclusion, and registry key
+:: Removes application files, shortcuts, and registry key
 :: ========================================================================
 
 :: Check for admin
 net session >nul 2>&1
 if %errorlevel% neq 0 (
     echo Requesting administrator privileges...
-    powershell -Command "Start-Process -FilePath '%~f0' -Verb RunAs"
+    powershell -Command "Start-Process -FilePath '%~f0' -ArgumentList '%*' -Verb RunAs"
     exit /b
 )
 
@@ -22,7 +22,8 @@ set "INSTALL_DIR=%ProgramFiles%\AuthorityGate\Win11Migrator"
 set "PARENT_DIR=%ProgramFiles%\AuthorityGate"
 set "REG_KEY=HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Win11Migrator"
 
-:: Confirm
+:: Confirm unless invoked by WinGet/Store in silent mode
+if /i "%~1"=="/silent" goto confirmed
 echo This will remove Win11Migrator from your computer.
 echo.
 set /p CONFIRM="Continue? (Y/N): "
@@ -31,12 +32,9 @@ if /i not "%CONFIRM%"=="Y" (
     pause
     exit /b
 )
+:confirmed
 
 echo.
-
-:: Remove Windows Defender exclusion
-echo Removing Windows Defender exclusion...
-powershell -NoProfile -Command "try { Remove-MpPreference -ExclusionPath '%INSTALL_DIR%' -ErrorAction Stop; Write-Host '  Done' } catch { Write-Host '  Skipped (not found or access denied)' }"
 
 :: Remove desktop shortcut
 echo Removing desktop shortcut...
@@ -91,7 +89,7 @@ if exist "%INSTALL_DIR%" (
         echo echo   Win11Migrator has been uninstalled.
         echo echo ============================================
         echo echo.
-        echo pause
+        echo if /i not "%~1"=="/silent" pause
         echo del /f /q "%%~f0"
     ) > "%TEMP_SCRIPT%"
     start "" "%TEMP_SCRIPT%"
@@ -105,4 +103,4 @@ echo ============================================
 echo   Win11Migrator has been uninstalled.
 echo ============================================
 echo.
-pause
+if /i not "%~1"=="/silent" pause
